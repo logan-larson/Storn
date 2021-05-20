@@ -1,0 +1,38 @@
+.container {
+  font-family: sans-serif;
+  height: 100%;
+}
+
+.title {
+  font-size: 48px;
+  text-align: center;
+  padding: 20px 10px;
+  color: #fff;
+  background-color: #303435;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.list {
+  font-size: 24px;
+  padding: 20px;
+  background-color: #494f51;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.button {
+  border-radius: 30px;
+  color: #c7c7c7;
+  background-color: #304969;
+  font-size: 32px;
+  padding: 10px;
+  margin: 20px;
+  text-align: center;
+}
+
+.button:hover {
+  background-color: #39567c;
+  color: #fff;
+  cursor: pointer;
+}

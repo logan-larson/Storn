@@ -1,0 +1,15 @@
+.container {
+  border-radius: 25px;
+  color: #c7c7c7;
+  background-color: #303435;
+  font-size: 24px;
+  padding: 10px;
+  margin: 10px 0px;
+  text-align: center;
+}
+
+.container:hover {
+  background-color: #3b4041;
+  color: #fff;
+  cursor: pointer;
+}

@@ -1,0 +1,59 @@
+.container {
+  margin: 20px;
+}
+
+.name {
+  font-size: 32px;
+  color: #c7c7c7;
+  padding: 10px;
+  text-align: center;
+  background-color: #303435;
+  border-radius: 30px;
+}
+
+.selected {
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  color: #fff;
+}
+
+.name:hover {
+  background-color: #3b4041;
+  color: #fff;
+  cursor: pointer;
+}
+
+.project-list {
+  background-color: #5c6466;
+  color: #fff;
+  padding: 10px 20px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+
+.button {
+  border-radius: 25px;
+  color: #c7c7c7;
+  background-color: #304969;
+  font-size: 24px;
+  padding: 10px;
+  margin: 10px 0px;
+  text-align: center;
+}
+
+.button:hover {
+  background-color: #39567c;
+  color: #fff;
+  cursor: pointer;
+}
+
+.add-project-input {
+  border-radius: 25px;
+  color: #c7c7c7;
+  background-color: #304969;
+  font-size: 24px;
+  padding: 10px;
+  margin: 10px auto;
+  text-align: center;
+  justify-content: center;
+}

@@ -1,0 +1,10 @@
+<div class="container">
+  <app-project-tree class="tree" *ngIf="showProjectTree"></app-project-tree>
+  <div *ngIf="showProjectTree; else hiddenProjectTree">
+    <div class="button" (click)="showProjectTree = false">Hide Project Tree</div>
+  </div>
+  <ng-template #hiddenProjectTree>
+    <div class="button show-button" (click)="showProjectTree = true">Show Project Tree</div>
+  </ng-template>
+  <app-project class="project"></app-project>
+</div>
