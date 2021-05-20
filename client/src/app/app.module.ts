@@ -11,6 +11,7 @@ import { AddClassComponent } from './components/home/project-tree/add-class/add-
 import { ClassItemComponent } from './components/home/project-tree/class-item/class-item.component';
 import { AddProjectComponent } from './components/home/project-tree/class-item/add-project/add-project.component';
 import { ProjectItemComponent } from './components/home/project-tree/class-item/project-item/project-item.component';
+import { AuthComponent } from './components/auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ProjectItemComponent } from './components/home/project-tree/class-item/
     AddClassComponent,
     ClassItemComponent,
     AddProjectComponent,
-    ProjectItemComponent
+    ProjectItemComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,
