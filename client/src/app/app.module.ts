@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +13,7 @@ import { ClassItemComponent } from './components/home/project-tree/class-item/cl
 import { AddProjectComponent } from './components/home/project-tree/class-item/add-project/add-project.component';
 import { ProjectItemComponent } from './components/home/project-tree/class-item/project-item/project-item.component';
 import { AuthComponent } from './components/auth/auth.component';
+import { CallbackGithubComponent } from './components/auth/callback-github/callback-github.component';
 
 @NgModule({
   declarations: [
@@ -23,12 +25,14 @@ import { AuthComponent } from './components/auth/auth.component';
     ClassItemComponent,
     AddProjectComponent,
     ProjectItemComponent,
-    AuthComponent
+    AuthComponent,
+    CallbackGithubComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

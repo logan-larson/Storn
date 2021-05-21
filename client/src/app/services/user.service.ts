@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ClassItem } from '../models/ClassItem';
 
@@ -17,7 +18,7 @@ export class UserService {
     }
   ];
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   getClasses(cb) {
     cb(this.classes);
