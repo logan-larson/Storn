@@ -1,1 +1,8 @@
-<p>project works!</p>
+<div class="container">
+  <div class="title">{{ project.name }}</div>
+  <div>
+    <app-project-details [details]="project.details"></app-project-details>
+  </div>
+  <div>Kanban Board</div>
+  <div>Milestone Details</div>
+</div>
