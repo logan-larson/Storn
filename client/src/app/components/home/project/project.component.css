@@ -1,13 +1,22 @@
 .container {
+  padding: 0px 20px;
+  color: #fff;
 }
 
 .title {
   font-size: 48px;
-  color: #fff;
   background-color: #303435;
-  border-radius: 20px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
   text-align: center;
-  width: fit-content;
+  padding: 20px;
+  margin: auto;
+}
+
+.body {
+  background-color: #494f51;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
   padding: 20px;
   margin: auto;
 }

@@ -1,9 +1,17 @@
 <div class="container">
-  <div class="header">Project Details</div>
-  <div class="body">
+  <div class="header" [class.selected]="selected" (click)="changeSelected()">
+    Project Details
+  </div>
+  <div *ngIf="selected" class="body">
     <div>Description: {{ details.description }}</div>
     <div>Total Time Estimated: {{ details.totalTimeEstimated }}</div>
     <div>Total Time Actual: {{ details.totalTimeActual }}</div>
     <div>Deadline: {{ details.deadline }}</div>
+    <div class="button" (click)="editProjectDetails()">
+      Edit Project Details
+    </div>
   </div>
+</div>
+<div *ngIf="showEditProjectDetailsComponent">
+  <!-- <app-edit-project-details [class]="class" (close)="closeEditProjectDetails($event)"><app-edit-project-details> -->
 </div>
