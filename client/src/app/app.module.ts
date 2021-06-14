@@ -15,6 +15,8 @@ import { ProjectItemComponent } from './components/home/project-tree/class-item/
 import { AuthComponent } from './components/auth/auth.component';
 import { CallbackGithubComponent } from './components/auth/callback-github/callback-github.component';
 import { ProjectDetailsComponent } from './components/home/project/project-details/project-details.component';
+import { ProjectBoardComponent } from './components/home/project/project-board/project-board.component';
+import { MilestoneDetailsComponent } from './components/home/project/milestone-details/milestone-details.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { ProjectDetailsComponent } from './components/home/project/project-detai
     ProjectItemComponent,
     AuthComponent,
     CallbackGithubComponent,
-    ProjectDetailsComponent
+    ProjectDetailsComponent,
+    ProjectBoardComponent,
+    MilestoneDetailsComponent
   ],
   imports: [
     BrowserModule,
