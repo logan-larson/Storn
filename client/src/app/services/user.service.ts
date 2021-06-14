@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ClassItem } from '../models/ClassItem';
 
@@ -9,15 +10,15 @@ export class UserService {
   classes: ClassItem[] = [
     {
       name: "CS402",
-      projects: [{ name: "DeckBuilder" }, { name: "WeatherList" }]
+      projects: [{ id: "1", name: "DeckBuilder" }, { id: "2", name: "WeatherList" }]
     },
     {
       name: "CS442",
-      projects: [{ name: "FinalProject" }, { name: "FinalExam" }]
+      projects: [{ id: "3", name: "FinalProject" }, { id: "4", name: "FinalExam" }]
     }
   ];
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   getClasses(cb) {
     cb(this.classes);

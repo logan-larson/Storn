@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +13,12 @@ import { AddClassComponent } from './components/home/project-tree/add-class/add-
 import { ClassItemComponent } from './components/home/project-tree/class-item/class-item.component';
 import { AddProjectComponent } from './components/home/project-tree/class-item/add-project/add-project.component';
 import { ProjectItemComponent } from './components/home/project-tree/class-item/project-item/project-item.component';
+import { AuthComponent } from './components/auth/auth.component';
+import { CallbackGithubComponent } from './components/auth/callback-github/callback-github.component';
+import { ProjectDetailsComponent } from './components/home/project/project-details/project-details.component';
+import { ProjectBoardComponent } from './components/home/project/project-board/project-board.component';
+import { MilestoneDetailsComponent } from './components/home/project/milestone-details/milestone-details.component';
+import { EditProjectDetailsComponent } from './components/home/project/project-details/edit-project-details/edit-project-details.component';
 
 @NgModule({
   declarations: [
@@ -21,12 +29,20 @@ import { ProjectItemComponent } from './components/home/project-tree/class-item/
     AddClassComponent,
     ClassItemComponent,
     AddProjectComponent,
-    ProjectItemComponent
+    ProjectItemComponent,
+    AuthComponent,
+    CallbackGithubComponent,
+    ProjectDetailsComponent,
+    ProjectBoardComponent,
+    MilestoneDetailsComponent,
+    EditProjectDetailsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]

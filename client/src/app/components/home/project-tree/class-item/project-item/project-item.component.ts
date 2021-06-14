@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ProjectItem } from 'src/app/models/ProjectItem';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-project-item',
@@ -10,9 +11,15 @@ export class ProjectItemComponent implements OnInit {
 
   @Input() project: ProjectItem;
 
-  constructor() { }
+  @Output() selectedProject: EventEmitter<ProjectItem> = new EventEmitter<ProjectItem>();
+
+  constructor(private projectService: ProjectService) { }
 
   ngOnInit(): void {
+  }
+
+  selectProject() {
+    this.projectService.setSelectedProject(this.project.id);
   }
 
 }

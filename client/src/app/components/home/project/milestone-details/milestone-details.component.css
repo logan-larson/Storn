@@ -1,0 +1,16 @@
+.header {
+  font-size: 32px;
+  color: #fff;
+  padding: 20px;
+  background-color: #303435;
+  border-top-left-radius: 38px;
+  border-top-right-radius: 38px;
+}
+
+.body {
+  background-color: #5c6466;
+  color: #fff;
+  padding: 20px;
+  border-bottom-left-radius: 38px;
+  border-bottom-right-radius: 38px;
+}
