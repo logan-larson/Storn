@@ -1,8 +1,40 @@
 <div class="container">
   <div class="header">Project Board</div>
-  <div class="body">
-    <div>Todo</div>
-    <div>Doing</div>
-    <div>Done</div>
+  <div class="body" cdkDropListGroup>
+    <div class="milestone-list"
+    cdkDropList
+    [cdkDropListData]="board.todoColumn"
+    (cdkDropListDropped)="drop($event)">
+      <div class="column-header">Todo</div>
+      <div class="column-body">
+        <div *ngFor="let todoMilestone of board.todoColumn" class="milestone" cdkDrag>
+          {{todoMilestone.name}}
+        </div>
+      </div>
+    </div>
+
+    <div class="milestone-list"
+    cdkDropList
+    [cdkDropListData]="board.doingColumn"
+    (cdkDropListDropped)="drop($event)">
+      <div class="column-header">Doing</div>
+      <div class="column-body">
+        <div *ngFor="let doingMilestone of board.doingColumn" class="milestone" cdkDrag>
+          {{doingMilestone.name}}
+        </div>
+      </div>
+    </div>
+
+    <div class="milestone-list"
+    cdkDropList
+    [cdkDropListData]="board.doneColumn"
+    (cdkDropListDropped)="drop($event)">
+      <div class="column-header">Done</div>
+      <div class="column-body">
+        <div *ngFor="let doneMilestone of board.doneColumn" class="milestone" cdkDrag>
+          {{doneMilestone.name}}
+        </div>
+      </div>
+    </div>
   </div>
 </div>

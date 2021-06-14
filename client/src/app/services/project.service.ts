@@ -17,7 +17,12 @@ export class ProjectService {
         totalTimeEstimated: 45,
         totalTimeActual: 30,
         deadline: 69
-      } 
+      },
+      board: {
+        todoColumn: [{name: "Milestone 3"}],
+        doingColumn: [{name: "Milestone 2"}],
+        doneColumn: [{name: "Milestone 1"}]
+      }
     },
     { id: "2", name: "WeatherList" },
     { id: "3", name: "FinalProject" },

@@ -1,8 +1,8 @@
 export interface Milestone {
   name: string;
-  description: string;
-  timeEstimated: number;
-  timeActual: number;
-  deadline: number;
-
+  // temporarily optional
+  description?: string;
+  timeEstimated?: number;
+  timeActual?: number;
+  deadline?: number;
 }
