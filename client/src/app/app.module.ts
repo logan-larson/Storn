@@ -18,6 +18,7 @@ import { CallbackGithubComponent } from './components/auth/callback-github/callb
 import { ProjectDetailsComponent } from './components/home/project/project-details/project-details.component';
 import { ProjectBoardComponent } from './components/home/project/project-board/project-board.component';
 import { MilestoneDetailsComponent } from './components/home/project/milestone-details/milestone-details.component';
+import { EditProjectDetailsComponent } from './components/home/project/project-details/edit-project-details/edit-project-details.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { MilestoneDetailsComponent } from './components/home/project/milestone-d
     CallbackGithubComponent,
     ProjectDetailsComponent,
     ProjectBoardComponent,
-    MilestoneDetailsComponent
+    MilestoneDetailsComponent,
+    EditProjectDetailsComponent
   ],
   imports: [
     BrowserModule,

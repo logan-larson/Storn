@@ -7,11 +7,11 @@
     <div>Total Time Estimated: {{ details.totalTimeEstimated }}</div>
     <div>Total Time Actual: {{ details.totalTimeActual }}</div>
     <div>Deadline: {{ details.deadline }}</div>
-    <div class="button" (click)="editProjectDetails()">
+    <div id="editProjectDetails" class="button" (click)="showEditProjectDetailsComponent = true">
       Edit Project Details
     </div>
   </div>
-</div>
-<div *ngIf="showEditProjectDetailsComponent">
-  <!-- <app-edit-project-details [class]="class" (close)="closeEditProjectDetails($event)"><app-edit-project-details> -->
+  <div *ngIf="showEditProjectDetailsComponent">
+    <app-edit-project-details [class]="class" (close)="showEditProjectDetailsComponent = false"></app-edit-project-details>
+  </div>
 </div>

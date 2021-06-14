@@ -23,12 +23,4 @@ export class ProjectDetailsComponent implements OnInit {
     this.selected = !this.selected;
   }
 
-  editProjectDetails() {
-    this.showEditProjectDetailsComponent = true;
-  }
-
-  closeEditProjectDetails() {
-    this.showEditProjectDetailsComponent = false;
-  }
-
 }

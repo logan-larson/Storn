@@ -45,4 +45,8 @@ export class ProjectService {
     // Pull project from database
     cb(this.project);
   }
+
+  saveProjectDetails(cb) {
+    cb("saved");
+  }
 }
