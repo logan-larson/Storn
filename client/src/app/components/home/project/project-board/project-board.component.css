@@ -66,7 +66,13 @@
   background-color: #303435;
   border-radius: 24px;
   font-size: 20px;
-  color: #fff;
+  color: #c7c7c7;
   padding: 20px;
   margin-bottom: 5px;
+}
+
+.milestone:hover {
+  cursor: pointer;
+  background-color: #3b4041;
+  color: #fff;
 }

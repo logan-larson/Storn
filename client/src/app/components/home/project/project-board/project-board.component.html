@@ -7,7 +7,11 @@
     (cdkDropListDropped)="drop($event)">
       <div class="column-header">Todo</div>
       <div class="column-body">
-        <div *ngFor="let todoMilestone of board.todoColumn" class="milestone" cdkDrag>
+        <div 
+        *ngFor="let todoMilestone of board.todoColumn"
+        class="milestone"
+        cdkDrag
+        (click)="selectMilestone(todoMilestone)">
           {{todoMilestone.name}}
         </div>
       </div>
@@ -19,7 +23,11 @@
     (cdkDropListDropped)="drop($event)">
       <div class="column-header">Doing</div>
       <div class="column-body">
-        <div *ngFor="let doingMilestone of board.doingColumn" class="milestone" cdkDrag>
+        <div 
+        *ngFor="let doingMilestone of board.doingColumn" 
+        class="milestone" 
+        cdkDrag
+        (click)="selectMilestone(doingMilestone)">
           {{doingMilestone.name}}
         </div>
       </div>
@@ -31,7 +39,11 @@
     (cdkDropListDropped)="drop($event)">
       <div class="column-header">Done</div>
       <div class="column-body">
-        <div *ngFor="let doneMilestone of board.doneColumn" class="milestone" cdkDrag>
+        <div
+        *ngFor="let doneMilestone of board.doneColumn"
+        class="milestone"
+        cdkDrag
+        (click)="selectMilestone(doneMilestone)">
           {{doneMilestone.name}}
         </div>
       </div>

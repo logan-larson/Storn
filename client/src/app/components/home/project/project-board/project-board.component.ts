@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ProjectBoard } from 'src/app/models/ProjectBoard';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { Milestone } from 'src/app/models/Milestone';
+import { MilestoneService } from 'src/app/services/milestone.service';
 
 @Component({
   selector: 'app-project-board',
@@ -9,7 +11,8 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 })
 export class ProjectBoardComponent implements OnInit {
   @Input() board: ProjectBoard;
-  constructor() { }
+
+  constructor(private milestoneService: MilestoneService) { }
 
   ngOnInit(): void {
   }
@@ -25,6 +28,11 @@ export class ProjectBoardComponent implements OnInit {
     }
 
     // This is where you send an http req to server to update project
+  }
+
+  selectMilestone(milestone: Milestone) {
+    this.milestoneService.setSelectedMilestone(milestone);
+    console.log(milestone.name);
   }
 
 }
