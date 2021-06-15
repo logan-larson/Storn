@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
+import { Message } from '../models/Message';
 
 @Injectable({
   providedIn: 'root'
@@ -17,29 +18,39 @@ export class AuthService {
     @Inject(DOCUMENT) private document: Document
   ) { }
 
-  loginWithGithub(cb) {
-    // Probably going to pull the secret from the server at some point
-
+  loginWithGithub() {
+    // Navigate to github authorization page
     this.document.location.href = `https://github.com/login/oauth/authorize?client_id=${this.githubClientId}`;
-    // this.router.navigateByUrl(`https://github.com/login/oauth/authorize?client_id=${this.githubClientId}`)
-
-    /*
-    this.http.get('/api/v1/login/github').subscribe(() => {
-      cb();
-    })
-    */
   }
 
   setGithubCode(code: string) {
-    this.http.post(`https://github.com/login/oauth/access_token?client_id`, { 
-      client_id: this.githubClientId,
-      client_secret: this.githubClientSecret,
-      code: code
 
-    }).subscribe((res) => {
-      console.log(res);
+    // This is triggered by the initialization of the github/callback component
+    // On response the user is sent to home
+
+    this.http.post(`/api/v1/auth/github/callback`, { code: code } )
+    .subscribe((res: Message) => {
+      if (res.err) {
+        this.router.navigateByUrl('/auth');
+      } else {
+        this.router.navigateByUrl('/home');
+      }
     });
-    
-    console.log("code: " + code);
+  }
+
+  logoutGithub() {
+    this.http.post('/api/v1/auth/github/logout', "")
+    .subscribe((res: Message) => {
+      this.router.navigateByUrl('/auth');
+    })
+  }
+
+  validateUser() {
+    this.http.get('/api/v1/auth/github/validate')
+    .subscribe((res: Message) => {
+      if (res.err) {
+        this.logoutGithub();
+      }
+    })
   }
 }
