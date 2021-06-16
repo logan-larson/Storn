@@ -1,0 +1,9 @@
+div {
+  position: absolute;
+  transform: translate(50%, 50%);
+  background-color: #303435;
+  color: #fff;
+  font-size: 24px;
+  padding: 20px;
+  border-radius: 50px;
+}
