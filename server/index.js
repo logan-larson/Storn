@@ -13,9 +13,11 @@ app.use(
 	})
 );
 
-const authRouter = require('./routes/auth');
+const authRouter = require('./routes/auth-route');
+const userRouter = require('./routes/user-route');
 
 app.use('/', authRouter);
+app.use('/', userRouter);
 
 mongoose
 	.connect('mongodb://localhost/storn', {

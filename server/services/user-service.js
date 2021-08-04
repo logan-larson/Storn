@@ -1,9 +1,10 @@
-const User = require('../models/user');
+const User = require('../models/user-model');
 const mongoose = require('mongoose');
 
 async function findUserByGithubId(id) {
 	let u = await User.UserModel.findOne({ githubId: id });
 
+	// idk if this is necessary or not
 	if (u) {
 		return u;
 	} else {

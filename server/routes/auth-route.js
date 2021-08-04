@@ -81,6 +81,7 @@ router.all('/api/v1/*', async (req, res, next) => {
 	if (req.session) {
 		let u = await user.findUserByGithubId(req.session.githubId);
 		if (u) {
+			console.log(`User validated: ${u.name}\n`);
 			next();
 		} else {
 			res.json({ err: 'Unauthorized' });
