@@ -14,8 +14,6 @@ export class AuthComponent implements OnInit {
   }
 
   loginWithGithub() {
-    this.authService.loginWithGithub(() => {
-      console.log("logged in?");
-    }); 
+    this.authService.loginWithGithub(); 
   }
 }

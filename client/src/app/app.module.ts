@@ -19,6 +19,7 @@ import { ProjectDetailsComponent } from './components/home/project/project-detai
 import { ProjectBoardComponent } from './components/home/project/project-board/project-board.component';
 import { MilestoneDetailsComponent } from './components/home/project/milestone-details/milestone-details.component';
 import { EditProjectDetailsComponent } from './components/home/project/project-details/edit-project-details/edit-project-details.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { EditProjectDetailsComponent } from './components/home/project/project-d
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    DragDropModule
+    DragDropModule,
+    NoopAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
