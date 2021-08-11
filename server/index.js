@@ -8,9 +8,9 @@ const cookieSecret = 'thisisthecookiesecret';
 const mongoose = require('mongoose');
 
 app.use(
-	session({
-		secret: cookieSecret,
-	})
+  session({
+    secret: cookieSecret,
+  })
 );
 
 const authRouter = require('./routes/auth-route');
@@ -20,16 +20,19 @@ app.use('/', authRouter);
 app.use('/', userRouter);
 
 mongoose
-	.connect('mongodb://localhost/storn', {
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-		useFindAndModify: false,
-	})
-	.then((client) => {
-		app.listen(port, () => {
-			console.log(`Server started at http://localhost:${port}`);
-		});
-	})
-	.catch((err) => console.log(err));
+  .connect(
+    'mongodb+srv://admin:u9.yj8MFm6KpT8m@storn.9duq1.mongodb.net/Storn?retryWrites=true&w=majority',
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useFindAndModify: false,
+    }
+  )
+  .then((client) => {
+    app.listen(port, () => {
+      console.log(`Server started at http://localhost:${port}`);
+    });
+  })
+  .catch((err) => console.log(err));
 
 module.exports = app;

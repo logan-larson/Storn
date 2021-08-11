@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const Project = require('../models/project-model');
+const ProjectSchema = require('../models/project-model').ProjectSchema;
 
 const classSchema = new Schema({
   _id: mongoose.Schema.Types.ObjectId,
   name: String,
   color: String, // Hex code
-  projects: [Project.ProjectModel],
+  projects: [ProjectSchema],
 });
 
 exports.ClassSchema = classSchema;
