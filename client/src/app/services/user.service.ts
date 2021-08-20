@@ -1,4 +1,6 @@
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { HttpClient } from '@angular/common/http';
+import { ThrowStmt } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { ClassItem } from '../models/ClassItem';
 
@@ -6,27 +8,18 @@ import { ClassItem } from '../models/ClassItem';
   providedIn: 'root',
 })
 export class UserService {
-  classes: ClassItem[] = [
-    {
-      name: 'CS402',
-      projects: [
-        { id: '1', name: 'DeckBuilder' },
-        { id: '2', name: 'WeatherList' },
-      ],
-    },
-    {
-      name: 'CS442',
-      projects: [
-        { id: '3', name: 'FinalProject' },
-        { id: '4', name: 'FinalExam' },
-      ],
-    },
-  ];
+  classes: ClassItem[] = [];
 
   constructor(private http: HttpClient) {}
 
   getClasses(cb) {
-    cb(this.classes);
+    // Http GET to retrieve user's classes
+    this.http
+      .get('/api/v1/user/class')
+      .subscribe((data: ClassItem[]) => {
+        this.classes = data;
+        cb(data);
+      });
   }
 
   addProject(classItem: ClassItem, projectName: string, cb) {
@@ -35,12 +28,23 @@ export class UserService {
     cb();
   }
 
-  addClass(className: string, cb) {
+  addClass(className: String, cb) {
     this.http
       .post('/api/v1/user/class', { name: className })
       .subscribe((data: ClassItem) => {
-        this.classes.push({ name: data.name, projects: [] });
+        console.log("added class\n")
+        this.classes.push({ _id: data._id, name: data.name, color: data.color, projects: data.projects });
         cb();
       });
+  }
+
+  deleteClass(className: String, cb) {
+    this.http
+      .request('delete', '/api/v1/user/class', { body: { name: className } })
+      .subscribe((deletedClass: ClassItem) => {
+        //let index = this.classes.indexOf(data);
+        this.classes = this.classes.filter(c => c == deletedClass);
+        cb();
+      })
   }
 }

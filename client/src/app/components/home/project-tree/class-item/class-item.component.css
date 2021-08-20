@@ -41,10 +41,18 @@
   text-align: center;
 }
 
+.red {
+  background-color: rgb(134, 30, 30);
+}
+
 .button:hover {
   background-color: #39567c;
   color: #fff;
   cursor: pointer;
+}
+
+.red:hover {
+  background-color: rgb(158, 40, 40);
 }
 
 .add-project-input {

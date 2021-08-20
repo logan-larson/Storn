@@ -7,6 +7,9 @@ const PreferencesSchema =
 const userSchema = new Schema({
   _id: mongoose.Schema.Types.ObjectId,
   githubId: String,
+  // Eventually store these as encrypted strings
+  githubClientId: String,
+  githubClientSecret: String,
   name: String,
   // TEMP preferences is a String
   preferences: PreferencesSchema,
