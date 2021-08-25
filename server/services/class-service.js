@@ -5,22 +5,23 @@ const mongoose = require('mongoose');
 
 // For github users only
 async function saveNewClass(name, userId) {
-  // Save classId to User
-  const id = new mongoose.Types.ObjectId();
+  const user = await userService.findUserById(userId);
 
-  // c is class being created
+  if (!user) {
+    return { err: 'class-service.saveNewClass: Invalid userId' };
+  }
+
   const c = new Class.ClassModel({
-    _id: id,
+    _id: new mongoose.Types.ObjectId(),
+    userId: user._id,
     name: name,
     color: null,
     projects: [],
   });
+
   c.save();
 
-  const user = await userService.findUserById(userId);
-  user.classes.push(c);
-  user.save();
-
+  console.log(`\nSaved new class\n`);
   return c;
 }
 
@@ -30,7 +31,7 @@ async function getClasses(userId) {
   let u = await userService.findUserById(userId);
 
   if (u) {
-    return u.classes;
+    return await Class.ClassModel.find({ userId: u._id });
   }
 
   return null;
@@ -38,36 +39,14 @@ async function getClasses(userId) {
 
 module.exports.getClasses = getClasses;
 
-async function deleteClass(className, userId) {
-  // TODO Develop better, more universal way to handle errors
-
-  // Find the Class
-  let c = await Class.ClassModel.findOne({ name: className });
-  if (!c) {
-    return { err: 'class-service.deleteClass: Invalid className' };
-  }
-  // Find the User
-  let u = await userService.findUserById(userId);
-  if (!u) {
-    return { err: 'class-service.deleteClass: Invalid userId' };
-  }
-  // Delete the Class from the User's Class list
-  u.classes = u.classes.filter((e) => e == c); // This is not working
-  console.log(u.classes);
-  u.save((err, result) => {
-    if (err) {
-      return err;
-    } else {
-      return result;
-    }
-  });
+async function deleteClass(classId) {
   // Delete the Class from the Class collection
-  Class.ClassModel.deleteOne({ _id: c._id }, (err) => {
-    if (err) {
-      return { err: 'class-service.deleteClass: Invalid className' };
+  Class.ClassModel.deleteOne({ _id: classId }, (err) => {
+    if (!err) {
+      return { msg: 'class-service.deleteClass: Successfully deleted' };
     }
+    return { err: 'class-service.deleteClass: Invalid classId' };
   });
-  return c;
 }
 
 module.exports.deleteClass = deleteClass;

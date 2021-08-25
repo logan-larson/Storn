@@ -24,4 +24,9 @@ export class ProjectTreeComponent implements OnInit {
   logoutGithub() {
     this.authService.logoutGithub();
   }
+
+  removeClass(classItem: ClassItem) {
+    console.log(classItem)
+    this.classes = this.classes.filter(c => c != classItem);
+  }
 }

@@ -4,6 +4,7 @@ const ProjectSchema = require('../models/project-model').ProjectSchema;
 
 const classSchema = new Schema({
   _id: mongoose.Schema.Types.ObjectId,
+  userId: String,
   name: String,
   color: String, // Hex code
   projects: [ProjectSchema],

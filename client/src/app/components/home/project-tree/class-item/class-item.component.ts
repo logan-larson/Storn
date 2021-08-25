@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, HostListener } from '@angular/core';
+import { Component, OnInit, Input, HostListener, Output, EventEmitter } from '@angular/core';
 import { ClassItem } from 'src/app/models/ClassItem';
 import { UserService } from 'src/app/services/user.service';
 
@@ -9,7 +9,8 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ClassItemComponent implements OnInit {
 
-  @Input() class: ClassItem;
+  @Input() classItem: ClassItem;
+  @Output() deletedClass: EventEmitter<ClassItem> = new EventEmitter();
   selected: boolean = false;
   showAddProjectComponent: boolean = false;
 
@@ -46,8 +47,9 @@ export class ClassItemComponent implements OnInit {
   }
 
   removeClass() {
-    this.userService.deleteClass(this.class.name, () => {
-       
+    this.userService.deleteClass(this.classItem, () => {
+      console.log("here");
+      this.deletedClass.emit(this.classItem);
     });
   }
 

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ThrowStmt } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { ClassItem } from '../models/ClassItem';
+import { Message } from '../models/Message';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +18,7 @@ export class UserService {
     this.http
       .get('/api/v1/user/class')
       .subscribe((data: ClassItem[]) => {
+        console.log(data);
         this.classes = data;
         cb(data);
       });
@@ -33,17 +35,23 @@ export class UserService {
       .post('/api/v1/user/class', { name: className })
       .subscribe((data: ClassItem) => {
         console.log("added class\n")
-        this.classes.push({ _id: data._id, name: data.name, color: data.color, projects: data.projects });
+        this.classes.push(
+          {
+            _id: data._id,
+            userId: data.userId,
+            name: data.name,
+            color: data.color,
+            projects: data.projects
+          });
         cb();
       });
   }
 
-  deleteClass(className: String, cb) {
+  deleteClass(classItem: ClassItem, cb) {
     this.http
-      .request('delete', '/api/v1/user/class', { body: { name: className } })
-      .subscribe((deletedClass: ClassItem) => {
-        //let index = this.classes.indexOf(data);
-        this.classes = this.classes.filter(c => c == deletedClass);
+      .request('delete', '/api/v1/user/class', { body: classItem })
+      .subscribe((deletedClass: Message) => {
+        this.classes = this.classes.filter(c => c != classItem);
         cb();
       })
   }

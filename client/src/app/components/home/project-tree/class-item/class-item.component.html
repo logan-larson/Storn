@@ -1,9 +1,9 @@
 <div class="container">
   <div class="name" [class.selected]="selected" (click)="changeView()">
-    {{ class.name }}
+    {{ classItem.name }}
   </div>
   <div *ngIf="selected" class="project-list">
-    <div *ngFor="let project of class.projects">
+    <div *ngFor="let project of classItem.projects">
       <app-project-item [project]="project"></app-project-item>
     </div>
     <div id="addProjectButton" class="button" (click)="addProject()">
