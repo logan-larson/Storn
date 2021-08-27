@@ -27,7 +27,6 @@ router.post('/api/v1/class', async (req, res) => {
  */
 router.delete('/api/v1/class', async (req, res) => {
   /* TODO: Error catching for bad requests */
-
   let deletedClass = await classService.deleteClass(req.body._id);
 
   // ERROR checking is not working as of 8/24

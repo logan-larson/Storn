@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, HostListener, Output, EventEmitter } from '@angular/core';
 import { ClassItem } from 'src/app/models/ClassItem';
 import { ClassService } from 'src/app/services/class.service';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-class-item',
@@ -27,11 +28,14 @@ export class ClassItemComponent implements OnInit {
   }
   */
 
-  constructor(private classService: ClassService) { }
+  constructor(private classService: ClassService, private projectService: ProjectService) { }
 
   ngOnInit(): void {
     // Udpate class color
     // bind background color
+    this.projectService.getProjects(this.classItem, () => {
+      //console.log("\nreflect in view")
+    })
   }
 
   changeView() {

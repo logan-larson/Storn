@@ -3,16 +3,10 @@ const userService = require('./user-service');
 const mongoose = require('mongoose');
 
 // For github users only
-async function saveNewProject(projectName, userId) {
-  const user = await userService.findUserById(userId);
-
-  if (!user) {
-    return { err: 'project-service.saveNewProject: Invalid userId' };
-  }
-
+async function saveNewProject(projectName, classId) {
   const p = new Project.ProjectModel({
     _id: new mongoose.Types.ObjectId(),
-    userId: user._id,
+    classId: classId,
     name: projectName,
     //details: null,
     //board: null,
@@ -20,28 +14,20 @@ async function saveNewProject(projectName, userId) {
 
   p.save();
 
-  console.log(`\nSaved new project\n`);
+  console.log(p);
   return p;
 }
 
 module.exports.saveNewProject = saveNewProject;
 
-/*
-async function getClasses(userId) {
-  let u = await userService.findUserById(userId);
-
-  if (u) {
-    return await Class.ClassModel.find({ userId: u._id });
-  }
-
-  return null;
+async function getProjects(classId) {
+  return await Project.ProjectModel.find({ classId: classId });
 }
 
-module.exports.getClasses = getClasses;
-
+module.exports.getProjects = getProjects;
 
 // Update functionality
-
+/*
 
 
 async function deleteClass(classId) {

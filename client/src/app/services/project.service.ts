@@ -45,4 +45,12 @@ export class ProjectService {
         cb(project);
       })
   }
+
+  getProjects(classItem: ClassItem, cb) {
+    this.http.request('get', `/api/v1/project/${classItem._id}`)
+      .subscribe((projects: Project[]) => {
+        console.log(projects);
+        cb();
+      })
+  }
 }
