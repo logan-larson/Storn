@@ -15,7 +15,7 @@ export class ClassService {
   getClasses(cb) {
     // Http GET to retrieve user's classes
     this.http
-      .get('/api/v1/user/class')
+      .get('/api/v1/class')
       .subscribe((data: ClassItem[]) => {
         console.log(data);
         this.classes = data;
@@ -25,7 +25,7 @@ export class ClassService {
 
   addClass(className: String, cb) {
     this.http
-      .post('/api/v1/user/class', { name: className })
+      .post('/api/v1/class', { name: className })
       .subscribe((data: ClassItem) => {
         console.log("added class\n")
         this.classes.push(
@@ -42,7 +42,7 @@ export class ClassService {
 
   deleteClass(classItem: ClassItem, cb) {
     this.http
-      .request('delete', '/api/v1/user/class', { body: classItem })
+      .request('delete', '/api/v1/class', { body: classItem })
       .subscribe((deletedClass: Message) => {
         this.classes = this.classes.filter(c => c != classItem);
         cb();

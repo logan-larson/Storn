@@ -9,11 +9,7 @@ import { ProjectService } from 'src/app/services/project.service';
 })
 export class ProjectComponent implements OnInit {
 
-  project: Project = {
-    _id: "adsf",
-    name: "This project",
-    classId: "asdfa"
-  };
+  project: Project = null;
 
   constructor(private projectService: ProjectService) { 
     // Can rename in future
