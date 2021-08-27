@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
+import { ClassItem } from '../models/ClassItem';
 import { Project } from '../models/Project';
 
 @Injectable({
@@ -8,35 +10,16 @@ export class ProjectService {
   
   // Needs renaming to more intuitive names
 
-  projects: Project[] = [
-    { 
-      id: "1", 
-      name: "DeckBuilder", 
-      details: { 
-        description: "This is a description!",
-        totalTimeEstimated: 45,
-        totalTimeActual: 30,
-        deadline: 69
-      },
-      board: {
-        todoColumn: [{name: "Milestone 3"}],
-        doingColumn: [{name: "Milestone 2"}],
-        doneColumn: [{name: "Milestone 1"}]
-      }
-    },
-    { id: "2", name: "WeatherList" },
-    { id: "3", name: "FinalProject" },
-    { id: "4", name: "FinalExam" },
-  ];
+  projects: Project[] = [];
 
   project: Project = this.projects[0];
 
   getProject: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   setSelectedProject(id: string) {
-    this.project = this.projects.find((project) => project.id == id);
+    this.project = this.projects.find((project) => project._id == id);
     
     this.getProject.emit("User selected different project");
   }
@@ -48,5 +31,18 @@ export class ProjectService {
 
   saveProjectDetails(cb) {
     cb("saved");
+  }
+
+  addProject(classItem: ClassItem, projectName: String, cb) {
+    this.http.post(`/api/v1/project`, { id: classItem._id, projectName: projectName })
+      .subscribe((project: Project) => {
+        // push project into projects list
+        this.projects.push({
+          _id: project._id,
+          classId: project.classId,
+          name: project.name,
+        })
+        cb(project);
+      })
   }
 }

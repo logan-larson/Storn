@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const user = require('../services/user-service');
-const classService = require('../services/class-service');
+const projectService = require('../services/project-service');
 
 router.use(express.json());
 
@@ -10,17 +9,17 @@ router.use(express.json());
  * POST to create a new class
  */
 router.post('/api/v1/user/class', async (req, res) => {
-  let newClass = await classService.saveNewClass(
+  let newProject = await projectService.saveNewProject(
     req.body.name,
     req.session.githubId
   );
 
-  if (!newClass.err) {
-    res.json(newClass);
+  if (!newProject.err) {
+    res.json(newProject);
     return;
   }
 
-  res.status(500).json(newClass);
+  res.status(500).json(newProject);
 });
 
 /**
@@ -49,6 +48,7 @@ router.delete('/api/v1/user/class', async (req, res) => {
 router.get('/api/v1/user/class', async (req, res) => {
   let classes = await classService.getClasses(req.session.githubId);
   if (classes) {
+    console.log(classes);
     res.json(classes);
   }
 });

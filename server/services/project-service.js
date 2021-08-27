@@ -1,31 +1,32 @@
-const Class = require('../models/class-model');
-const userService = require('../services/user-service');
+const Project = require('../models/project-model');
+const userService = require('./user-service');
 const mongoose = require('mongoose');
 
 // For github users only
-async function saveNewClass(name, userId) {
+async function saveNewProject(projectName, userId) {
   const user = await userService.findUserById(userId);
 
   if (!user) {
-    return { err: 'class-service.saveNewClass: Invalid userId' };
+    return { err: 'project-service.saveNewProject: Invalid userId' };
   }
 
-  const c = new Class.ClassModel({
+  const p = new Project.ProjectModel({
     _id: new mongoose.Types.ObjectId(),
     userId: user._id,
-    name: name,
-    color: null,
-    projects: [],
+    name: projectName,
+    //details: null,
+    //board: null,
   });
 
-  c.save();
+  p.save();
 
-  console.log(`\nSaved new class\n`);
-  return c;
+  console.log(`\nSaved new project\n`);
+  return p;
 }
 
-module.exports.saveNewClass = saveNewClass;
+module.exports.saveNewProject = saveNewProject;
 
+/*
 async function getClasses(userId) {
   let u = await userService.findUserById(userId);
 
@@ -38,6 +39,11 @@ async function getClasses(userId) {
 
 module.exports.getClasses = getClasses;
 
+
+// Update functionality
+
+
+
 async function deleteClass(classId) {
   // Delete the Class from the Class collection
   Class.ClassModel.deleteOne({ _id: classId }, (err) => {
@@ -49,3 +55,4 @@ async function deleteClass(classId) {
 }
 
 module.exports.deleteClass = deleteClass;
+*/

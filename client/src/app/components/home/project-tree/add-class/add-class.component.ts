@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, HostListener } from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
+import { ClassService } from 'src/app/services/class.service';
 
 @Component({
   selector: 'app-add-class',
@@ -27,14 +27,14 @@ export class AddClassComponent implements OnInit {
     }
   }
 
-  constructor(private userService: UserService) { }
+  constructor(private classService: ClassService) { }
 
   ngOnInit(): void {
     // Focus on input
   }
 
   addClass() {
-    this.userService.addClass(this.className, () => {
+    this.classService.addClass(this.className, () => {
       this.close.emit("close me");
     })
   }

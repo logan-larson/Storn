@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Project } from 'src/app/models/Project';
-import { ProjectItem } from 'src/app/models/ProjectItem';
 import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
@@ -10,8 +9,11 @@ import { ProjectService } from 'src/app/services/project.service';
 })
 export class ProjectComponent implements OnInit {
 
-  projectItem: ProjectItem;
-  project: Project;
+  project: Project = {
+    _id: "adsf",
+    name: "This project",
+    classId: "asdfa"
+  };
 
   constructor(private projectService: ProjectService) { 
     // Can rename in future
@@ -22,15 +24,19 @@ export class ProjectComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    /*
     this.projectService.getSelectedProject((project) => {
       this.project = project;
     });
+    */
   }
 
   getProject() {
+    /*
     this.projectService.getSelectedProject((project) => {
       this.project = project;
     });
+    */
   }
 
 }

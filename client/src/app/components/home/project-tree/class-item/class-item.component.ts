@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, HostListener, Output, EventEmitter } from '@angular/core';
 import { ClassItem } from 'src/app/models/ClassItem';
-import { UserService } from 'src/app/services/user.service';
+import { ClassService } from 'src/app/services/class.service';
 
 @Component({
   selector: 'app-class-item',
@@ -27,7 +27,7 @@ export class ClassItemComponent implements OnInit {
   }
   */
 
-  constructor(private userService: UserService) { }
+  constructor(private classService: ClassService) { }
 
   ngOnInit(): void {
     // Udpate class color
@@ -47,7 +47,7 @@ export class ClassItemComponent implements OnInit {
   }
 
   removeClass() {
-    this.userService.deleteClass(this.classItem, () => {
+    this.classService.deleteClass(this.classItem, () => {
       console.log("here");
       this.deletedClass.emit(this.classItem);
     });
