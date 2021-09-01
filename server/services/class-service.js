@@ -1,4 +1,5 @@
 const Class = require('../models/class-model');
+const Project = require('../models/project-model');
 const userService = require('../services/user-service');
 const mongoose = require('mongoose');
 
@@ -15,7 +16,6 @@ async function saveNewClass(name, userId) {
     userId: user._id,
     name: name,
     color: null,
-    projects: [],
   });
 
   c.save();
@@ -39,6 +39,13 @@ async function getClasses(userId) {
 module.exports.getClasses = getClasses;
 
 async function deleteClass(classId) {
+  // Delete all projects associated with the class
+  Project.ProjectModel.deleteMany({ classId: classId }, (err) => {
+    if (err) {
+      return { err: 'class-service.deleteClass: Invalid classId' };
+    }
+  });
+
   // Delete the Class from the Class collection
   Class.ClassModel.deleteOne({ _id: classId }, (err) => {
     if (!err) {

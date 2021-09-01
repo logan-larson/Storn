@@ -3,7 +3,7 @@
     {{ classItem.name }}
   </div>
   <div *ngIf="selected" class="project-list">
-    <div *ngFor="let project of classItem.projects">
+    <div *ngFor="let project of projects">
       <app-project-item [project]="project"></app-project-item>
     </div>
     <div id="addProjectButton" class="button" (click)="addProject()">

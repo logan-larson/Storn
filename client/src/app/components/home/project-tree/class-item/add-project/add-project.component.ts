@@ -25,7 +25,6 @@ export class AddProjectComponent implements OnInit {
       && event.target != document.getElementById('addProject')
       && event.target != document.getElementById('addProjectButton')
     ) {
-      console.log(event.target);
       this.close.emit("close me");
     }
   }

@@ -29,8 +29,6 @@ async function saveNewUser(name, githubId) {
     githubClientId: null,
     githubClientSecret: null,
     name: name,
-    classes: [],
-    preferences: null,
   });
 
   user.save((err, result) => {

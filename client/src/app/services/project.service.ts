@@ -25,7 +25,6 @@ export class ProjectService {
   }
 
   getSelectedProject(cb) {
-    // Pull project from database
     cb(this.project);
   }
 
@@ -41,6 +40,8 @@ export class ProjectService {
           _id: project._id,
           classId: project.classId,
           name: project.name,
+          details: project.details,
+          board: project.board
         })
         cb(project);
       })
@@ -49,8 +50,9 @@ export class ProjectService {
   getProjects(classItem: ClassItem, cb) {
     this.http.request('get', `/api/v1/project/${classItem._id}`)
       .subscribe((projects: Project[]) => {
-        console.log(projects);
-        cb();
+        this.projects = projects;
+        cb(projects);
+
       })
   }
 }

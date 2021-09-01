@@ -10,6 +10,6 @@
     </div>
   </div>
   <div *ngIf="showAddClassComponent">
-    <app-add-class (close)="showAddClassComponent = false"></app-add-class>
+    <app-add-class (close)="showAddClassComponent = false; getClasses()"></app-add-class>
   </div>
 </div>

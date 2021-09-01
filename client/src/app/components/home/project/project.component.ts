@@ -28,11 +28,8 @@ export class ProjectComponent implements OnInit {
   }
 
   getProject() {
-    /*
     this.projectService.getSelectedProject((project) => {
       this.project = project;
     });
-    */
   }
-
 }

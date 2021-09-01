@@ -5,5 +5,4 @@ export interface ClassItem {
   userId: String;
   name: String;
   color: String;
-  projects: Project[];
 }

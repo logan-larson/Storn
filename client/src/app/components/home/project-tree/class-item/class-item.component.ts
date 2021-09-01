@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, HostListener, Output, EventEmitter } from '@angular/core';
 import { ClassItem } from 'src/app/models/ClassItem';
+import { Project } from 'src/app/models/Project';
 import { ClassService } from 'src/app/services/class.service';
 import { ProjectService } from 'src/app/services/project.service';
 
@@ -14,6 +15,7 @@ export class ClassItemComponent implements OnInit {
   @Output() deletedClass: EventEmitter<ClassItem> = new EventEmitter();
   selected: boolean = false;
   showAddProjectComponent: boolean = false;
+  projects: Project[];
 
 
   // We'll see if this is necessary after host listener on child component
@@ -33,8 +35,8 @@ export class ClassItemComponent implements OnInit {
   ngOnInit(): void {
     // Udpate class color
     // bind background color
-    this.projectService.getProjects(this.classItem, () => {
-      //console.log("\nreflect in view")
+    this.projectService.getProjects(this.classItem, (projects) => {
+      this.projects = projects; 
     })
   }
 
@@ -52,7 +54,6 @@ export class ClassItemComponent implements OnInit {
 
   removeClass() {
     this.classService.deleteClass(this.classItem, () => {
-      console.log("here");
       this.deletedClass.emit(this.classItem);
     });
   }
