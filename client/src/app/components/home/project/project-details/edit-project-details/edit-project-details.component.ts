@@ -10,8 +10,11 @@ import { ProjectService } from 'src/app/services/project.service';
 export class EditProjectDetailsComponent implements OnInit {
 
   @Input() details: ProjectDetails;
-  projectName: String;
-  
+  name: String;
+  deadline: Date;
+  timeHours: Number;
+  timeMinutes: Number;
+
 
   @Output() close: EventEmitter<any> = new EventEmitter();
 
@@ -23,7 +26,14 @@ export class EditProjectDetailsComponent implements OnInit {
       // details pop up
       event.target != document.getElementById('header')
       && event.target != document.getElementById('content')
-      && event.target != document.getElementById('projectName')
+      && event.target != document.getElementById('name')
+      && event.target != document.getElementById('deadline')
+      && event.target != document.getElementById('timeHours')
+      && event.target != document.getElementById('timeMinutes')
+      && event.target != document.getElementById('nameLabel')
+      && event.target != document.getElementById('deadlineLabel')
+      && event.target != document.getElementById('timeHoursLabel')
+      && event.target != document.getElementById('timeMinutesLabel')
       && event.target != document.getElementById('saveProjectDetails')
       && event.target != document.getElementById('editProjectDetails')
     ) {
@@ -34,10 +44,14 @@ export class EditProjectDetailsComponent implements OnInit {
   constructor(private projectService: ProjectService) { }
 
   ngOnInit(): void {
+    this.name = this.details.name;
+    this.deadline = this.details.deadline;
+    this.timeHours = this.details.totalTimeEstimated.hours;
+    this.timeMinutes = this.details.totalTimeEstimated.minutes;
   }
 
   saveProjectDetails() {
-    this.projectService.saveProjectDetails(() => {
+    this.projectService.saveProjectDetails(this.name, this.deadline, this.timeHours, this.timeMinutes, () => {
       this.close.emit("close me");
     });
   }

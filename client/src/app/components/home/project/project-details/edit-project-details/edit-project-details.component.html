@@ -1,7 +1,22 @@
 <div class="container">
   <div class="header" id="header">Edit Project Details</div>
   <div class="content" id="content">
-    <input id="projectName" type="text" placeholder="Project Name" [(ngModel)]="projectName" />
+    <div>
+      <label id="nameLabel">Project Name: </label>
+      <input id="name" type="text" placeholder="{{name}}" [(ngModel)]="name" />
+    </div>
+    <div>
+      <label id="deadlineLabel">Deadline: </label>
+      <input id="deadline" type="date" [(ngModel)]="deadline" />
+    </div>
+    <div>
+      <label id="timeHoursLabel">Estimated Time Hours: </label>
+      <input id="timeHours" type="number" placeholder="{{timeHours}}" [(ngModel)]="timeHours" />
+    </div>
+    <div>
+      <label id="timeMinutesLabel">Estimated Time Minutes: </label>
+      <input id="timeMinutes" type="number" min="0" max="59" placeholder="{{timeMinutes}}" [(ngModel)]="timeMinutes" />
+    </div>
     <div class="submit" id="saveProjectDetails" (click)="saveProjectDetails()">Save Project Details</div>
   </div>
 </div>

@@ -3,6 +3,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { ClassItem } from '../models/ClassItem';
 import { Message } from '../models/Message';
 import { Project } from '../models/Project';
+import { ProjectDetails } from '../models/ProjectDetails';
 
 @Injectable({
   providedIn: 'root'
@@ -32,8 +33,21 @@ export class ProjectService {
     cb(this.project);
   }
 
-  saveProjectDetails(cb) {
-    cb("saved");
+  saveProjectDetails(
+    name: String,
+    deadline: Date,
+    timeHours: Number,
+    timeMinutes: Number, 
+    cb) {
+
+      this.http.put('/api/v1/project', { 
+        name: name, 
+        deadline: deadline,
+        timeHours: timeHours,
+        timeMinutes: timeMinutes   
+      }).subscribe((projectDetails: ProjectDetails) => {
+        cb("saved");
+      });
   }
 
   addProject(classItem: ClassItem, projectName: String, cb) {
