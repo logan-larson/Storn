@@ -1,6 +1,11 @@
+import { Time } from "@angular/common";
+
 export interface ProjectDetails {
+  _id?: String,
+  name: String,
   description: string;
-  totalTimeEstimated: number;
-  totalTimeActual: number;
-  deadline: number;
+  dateStarted: Date; 
+  deadline: Date;
+  totalTimeEstimated: Time;
+  totalTimeActual: Time;
 }

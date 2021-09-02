@@ -30,7 +30,13 @@ export class ClassItemComponent implements OnInit {
   }
   */
 
-  constructor(private classService: ClassService, private projectService: ProjectService) { }
+  constructor(private classService: ClassService, private projectService: ProjectService) {
+    this.projectService.getProjectsEmitter.subscribe(() => {
+      this.projectService.getProjects(this.classItem, (projects) => {
+        this.projects = projects
+      })
+    }) 
+  }
 
   ngOnInit(): void {
     // Udpate class color

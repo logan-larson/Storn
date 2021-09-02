@@ -10,8 +10,11 @@
     <div id="editProjectDetails" class="button" (click)="showEditProjectDetailsComponent = true">
       Edit Project Details
     </div>
+    <div id="removeProjectButton" class="button red" (click)="removeProject()" style="margin-top: 10px;" >
+      Remove Project
+    </div>
   </div>
   <div *ngIf="showEditProjectDetailsComponent">
-    <app-edit-project-details [class]="class" (close)="showEditProjectDetailsComponent = false"></app-edit-project-details>
+    <app-edit-project-details [details]="details" (close)="showEditProjectDetailsComponent = false"></app-edit-project-details>
   </div>
 </div>

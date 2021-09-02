@@ -8,14 +8,15 @@ const mongoose = require('mongoose');
 async function saveNewProject(projectName, classId) {
   const d = new Details.ProjectDetailsModel({
     _id: new mongoose.Types.ObjectId(),
-    deadline: new Date(),
+    name: projectName,
+    dateStarted: new Date(),
+    deadline: null,
     timeEstimation: 0,
     timeActual: 0,
   });
   const p = new Project.ProjectModel({
     _id: new mongoose.Types.ObjectId(),
     classId: classId,
-    name: projectName,
     details: d,
     board: Board.ProjectBoardSchema,
   });
@@ -35,18 +36,15 @@ async function getProjects(classId) {
 module.exports.getProjects = getProjects;
 
 // Update functionality
-/*
 
-
-async function deleteClass(classId) {
-  // Delete the Class from the Class collection
-  Class.ClassModel.deleteOne({ _id: classId }, (err) => {
+async function deleteProject(projectId) {
+  // Delete the Project from the Project collection
+  Project.ProjectModel.deleteOne({ _id: projectId }, (err) => {
     if (!err) {
-      return { msg: 'class-service.deleteClass: Successfully deleted' };
+      return { msg: 'project-service.deleteProject: Successfully deleted' };
     }
-    return { err: 'class-service.deleteClass: Invalid classId' };
+    return { err: 'project-service.deleteProject: Invalid projectId' };
   });
 }
 
-module.exports.deleteClass = deleteClass;
-*/
+module.exports.deleteProject = deleteProject;

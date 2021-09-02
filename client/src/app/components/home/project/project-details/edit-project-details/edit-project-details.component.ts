@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, HostListener } from '@angular/core';
+import { ProjectDetails } from 'src/app/models/ProjectDetails';
 import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
@@ -8,7 +9,9 @@ import { ProjectService } from 'src/app/services/project.service';
 })
 export class EditProjectDetailsComponent implements OnInit {
 
-  @Input() projectName: string;
+  @Input() details: ProjectDetails;
+  projectName: String;
+  
 
   @Output() close: EventEmitter<any> = new EventEmitter();
 
@@ -24,7 +27,6 @@ export class EditProjectDetailsComponent implements OnInit {
       && event.target != document.getElementById('saveProjectDetails')
       && event.target != document.getElementById('editProjectDetails')
     ) {
-      console.log(event.target);
       this.close.emit("close me");
     }
   }
@@ -36,7 +38,6 @@ export class EditProjectDetailsComponent implements OnInit {
 
   saveProjectDetails() {
     this.projectService.saveProjectDetails(() => {
-      console.log("saved");
       this.close.emit("close me");
     });
   }

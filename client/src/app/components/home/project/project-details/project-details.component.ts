@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { VirtualTimeScheduler } from 'rxjs';
 import { ProjectDetails } from 'src/app/models/ProjectDetails';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-project-details',
@@ -10,17 +11,22 @@ import { ProjectDetails } from 'src/app/models/ProjectDetails';
 export class ProjectDetailsComponent implements OnInit {
 
   @Input() details: ProjectDetails;
+  @Output() removeProjectEmitter: EventEmitter<String> = new EventEmitter();
   selected: boolean = false;
   showEditProjectDetailsComponent: boolean = false;
 
 
-  constructor() { }
+  constructor(private projectService: ProjectService) { }
 
   ngOnInit(): void {
   }
 
   changeSelected() {
     this.selected = !this.selected;
+  }
+
+  removeProject() {
+    this.removeProjectEmitter.emit("delete me");
   }
 
 }

@@ -6,7 +6,7 @@ const projectService = require('../services/project-service');
 router.use(express.json());
 
 /**
- * POST to create a new class
+ * POST to create a new project
  */
 router.post('/api/v1/project', async (req, res) => {
   let newProject = await projectService.saveNewProject(
@@ -23,13 +23,12 @@ router.post('/api/v1/project', async (req, res) => {
 });
 
 /**
- * GET returns list of classes associated with a user
+ * GET returns list of projects associated with a user
  */
 router.get('/api/v1/project/:classId', async (req, res) => {
   let projects = await projectService.getProjects(req.params.classId);
 
   if (projects) {
-    console.log(projects);
     res.json(projects);
   }
 });
@@ -37,21 +36,19 @@ router.get('/api/v1/project/:classId', async (req, res) => {
 /**
  * DELETE to delete a class
  */
-/*
-router.delete('/api/v1/user/class', async (req, res) => {
+router.delete('/api/v1/project', async (req, res) => {
   // TODO: Error catching for bad requests
 
-  let deletedClass = await classService.deleteClass(req.body._id);
+  let deletedProject = await projectService.deleteProject(req.body._id);
 
   // ERROR checking is not working as of 8/24
-  //if (!deletedClass.err) {
-    //res.json(deletedClass);
-    //return;
+  //if (!deletedProject.err) {
+  //res.json(deletedProject);
+  //return;
   //}
 
-  res.json(deletedClass);
-  // res.status(500).json(deletedClass);
+  res.json(deletedProject);
+  // res.status(500).json(deletedProject);
 });
-*/
 
 module.exports = router;

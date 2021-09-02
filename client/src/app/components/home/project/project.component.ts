@@ -14,7 +14,7 @@ export class ProjectComponent implements OnInit {
   constructor(private projectService: ProjectService) { 
     // Can rename in future
     // Lets component know when user switches projects
-    this.projectService.getProject.subscribe(() => {
+    this.projectService.getProjectEmitter.subscribe(() => {
       this.getProject();
     }) 
   }
@@ -31,5 +31,10 @@ export class ProjectComponent implements OnInit {
     this.projectService.getSelectedProject((project) => {
       this.project = project;
     });
+  }
+
+  removeProject() {
+    this.projectService.deleteProject(this.project, () => {
+    })
   }
 }
