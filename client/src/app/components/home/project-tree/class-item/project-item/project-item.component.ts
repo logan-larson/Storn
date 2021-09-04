@@ -13,7 +13,13 @@ export class ProjectItemComponent implements OnInit {
 
   @Output() selectedProject: EventEmitter<Project> = new EventEmitter<Project>();
 
-  constructor(private projectService: ProjectService) { }
+  constructor(private projectService: ProjectService) {
+    this.projectService.updateDetailsEmitter.subscribe((id) => {
+      this.projectService.getProjectById(id, (project) => {
+        this.project = project;
+      });
+    })
+  }
 
   ngOnInit(): void {
   }

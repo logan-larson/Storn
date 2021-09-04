@@ -1,11 +1,11 @@
-import { Time } from "@angular/common";
+import { TimeModel } from "./TimeModel";
 
 export interface ProjectDetails {
   _id?: String,
   name: String,
-  description: string;
-  dateStarted: Date; 
+  description: String;
+  dateStarted?: Date; 
   deadline: Date;
-  totalTimeEstimated: Time;
-  totalTimeActual: Time;
+  totalTimeEstimated: TimeModel;
+  totalTimeActual?: TimeModel;
 }

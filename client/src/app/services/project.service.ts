@@ -17,8 +17,8 @@ export class ProjectService {
   project: Project = this.projects[0];
 
   getProjectEmitter: EventEmitter<string> = new EventEmitter<string>();
-
   getProjectsEmitter: EventEmitter<string> = new EventEmitter<string>();
+  updateDetailsEmitter: EventEmitter<String> = new EventEmitter<String>();
 
   constructor(private http: HttpClient) { }
 
@@ -34,18 +34,15 @@ export class ProjectService {
   }
 
   saveProjectDetails(
-    name: String,
-    deadline: Date,
-    timeHours: Number,
-    timeMinutes: Number, 
+    _id: String,
+    details: ProjectDetails,
     cb) {
 
-      this.http.put('/api/v1/project', { 
-        name: name, 
-        deadline: deadline,
-        timeHours: timeHours,
-        timeMinutes: timeMinutes   
-      }).subscribe((projectDetails: ProjectDetails) => {
+      this.http.put('/api/v1/project/details', { 
+        _id: _id,
+        details: details
+      }).subscribe((msg: Message) => {
+        this.updateDetailsEmitter.emit(_id);
         cb("saved");
       });
   }
@@ -54,13 +51,7 @@ export class ProjectService {
     this.http.post(`/api/v1/project`, { id: classItem._id, projectName: projectName })
       .subscribe((project: Project) => {
         // push project into projects list
-        this.projects.push({
-          _id: project._id,
-          classId: project.classId,
-          details: project.details,
-          board: project.board
-        })
-        
+        this.projects.push(project);
         this.setSelectedProject(project._id);
 
         cb(project);
@@ -68,12 +59,19 @@ export class ProjectService {
   }
 
   getProjects(classItem: ClassItem, cb) {
-    this.http.request('get', `/api/v1/project/${classItem._id}`)
+    this.http.get(`/api/v1/projects/${classItem._id}`)
       .subscribe((projects: Project[]) => {
         this.projects = projects;
         cb(projects);
 
       })
+  }
+
+  getProjectById(id: String, cb) {
+    this.http.get(`/api/v1/project/${id}`)
+    .subscribe((project: Project) => {
+      cb(project);
+    });
   }
 
   deleteProject(project: Project, cb) {

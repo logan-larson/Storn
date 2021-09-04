@@ -4,6 +4,7 @@
   <div class="body">
     <app-project-details
     *ngIf="project"
+    [project]="project"
     [details]="project.details"
     (removeProjectEmitter)="removeProject()"></app-project-details>
     <app-project-board *ngIf="project" [board]="project.board"></app-project-board>

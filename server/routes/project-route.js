@@ -25,11 +25,22 @@ router.post('/api/v1/project', async (req, res) => {
 /**
  * GET returns list of projects associated with a user
  */
-router.get('/api/v1/project/:classId', async (req, res) => {
+router.get('/api/v1/projects/:classId', async (req, res) => {
   let projects = await projectService.getProjects(req.params.classId);
 
   if (projects) {
     res.json(projects);
+  }
+});
+
+/**
+ * GET returns project corresponding to projectId
+ */
+router.get('/api/v1/project/:projectId', async (req, res) => {
+  let project = await projectService.getProject(req.params.projectId);
+
+  if (project) {
+    res.json(project);
   }
 });
 
@@ -49,6 +60,15 @@ router.delete('/api/v1/project', async (req, res) => {
 
   res.json(deletedProject);
   // res.status(500).json(deletedProject);
+});
+
+router.put('/api/v1/project/details', async (req, res) => {
+  let updatedProjectDetails = await projectService.updateProjectDetails(
+    req.body._id,
+    req.body.details
+  );
+
+  res.json(updatedProjectDetails);
 });
 
 module.exports = router;

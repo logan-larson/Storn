@@ -4,8 +4,8 @@
   </div>
   <div *ngIf="selected" class="body">
     <div>Description: {{ details.description }}</div>
-    <div>Total Time Estimated: {{ details.totalTimeEstimated }}</div>
-    <div>Total Time Actual: {{ details.totalTimeActual }}</div>
+    <div>Total Time Estimated: {{ details.totalTimeEstimated.hours }} hrs {{ details.totalTimeEstimated.minutes }} min</div>
+    <div *ngIf="details.totalTimeActual">Total Time Actual: {{ details.totalTimeActual.hours }} hrs {{ details.totalTimeActual.minutes }} min</div>
     <div>Deadline: {{ details.deadline }}</div>
     <div id="editProjectDetails" class="button" (click)="showEditProjectDetailsComponent = true">
       Edit Project Details
@@ -15,6 +15,6 @@
     </div>
   </div>
   <div *ngIf="showEditProjectDetailsComponent">
-    <app-edit-project-details [details]="details" (close)="showEditProjectDetailsComponent = false"></app-edit-project-details>
+    <app-edit-project-details [project]="project" [details]="details" (close)="showEditProjectDetailsComponent = false"></app-edit-project-details>
   </div>
 </div>

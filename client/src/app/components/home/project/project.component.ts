@@ -16,7 +16,13 @@ export class ProjectComponent implements OnInit {
     // Lets component know when user switches projects
     this.projectService.getProjectEmitter.subscribe(() => {
       this.getProject();
-    }) 
+    });
+
+    this.projectService.updateDetailsEmitter.subscribe((id) => {
+      this.projectService.getProjectById(id, (project) => {
+        this.project = project;
+      });
+    })
   }
 
   ngOnInit(): void {

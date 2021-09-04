@@ -7,7 +7,6 @@ const classSchema = new Schema({
   userId: String,
   name: String,
   color: String, // Hex code
-  projects: [ProjectSchema],
 });
 
 exports.ClassSchema = classSchema;

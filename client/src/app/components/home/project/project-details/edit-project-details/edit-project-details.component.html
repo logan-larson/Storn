@@ -6,6 +6,10 @@
       <input id="name" type="text" placeholder="{{name}}" [(ngModel)]="name" />
     </div>
     <div>
+      <label id="descriptionLabel">Description: </label>
+      <input id="description" type="text" placeholder="{{description}}" [(ngModel)]="description" />
+    </div>
+    <div>
       <label id="deadlineLabel">Deadline: </label>
       <input id="deadline" type="date" [(ngModel)]="deadline" />
     </div>
@@ -18,5 +22,6 @@
       <input id="timeMinutes" type="number" min="0" max="59" placeholder="{{timeMinutes}}" [(ngModel)]="timeMinutes" />
     </div>
     <div class="submit" id="saveProjectDetails" (click)="saveProjectDetails()">Save Project Details</div>
+    <div class="cancel" id="cancel" (click)="cancel()">Cancel</div>
   </div>
 </div>

@@ -13,7 +13,6 @@ const userSchema = new Schema({
   name: String,
   // TEMP preferences is a String
   preferences: PreferencesSchema,
-  classes: [ClassSchema],
 });
 
 exports.UserSchema = userSchema;
