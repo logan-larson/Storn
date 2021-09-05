@@ -34,9 +34,7 @@ export class ProjectComponent implements OnInit {
   }
 
   getProject() {
-    this.projectService.getSelectedProject((project) => {
-      this.project = project;
-    });
+    this.project = this.projectService.getSelectedProject();
   }
 
   removeProject() {

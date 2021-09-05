@@ -1,7 +1,85 @@
+:root {
+  --blue-button: #304969;
+  --blue-button-hover: #39567c;
+  --red-button: #861e1e;
+  --red-button-hover: #9e2828;
+  --green-button: #287320;
+  --green-button-hover: #2e8724;
+  --header-background: #303435;
+}
+
+.header {
+  font-size: 32px;
+  color: #fff;
+  padding: 20px;
+  background-color: #303435;
+  border-radius: 38px;
+}
+
+.selected {
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  color: #fff;
+}
+
+.button-small {
+  border-radius: 38px;
+  color: #c7c7c7;
+  font-size: 24px;
+  padding: 10px 20px;
+  width: fit-content;
+  margin: auto;
+  text-align: center;
+}
+
+.button-small:hover {
+  color: #fff;
+  cursor: pointer;
+}
+
+.blue-button {
+  background-color: var(--blue-button);
+}
+
+.blue-button-hover {
+  background-color: var(--blue-button-hover);
+}
+
+.red-button {
+  background-color: var(--red-button);
+}
+
+.red-button-hover {
+  background-color: var(--red-button-hover);
+}
+
+.green-button {
+  background-color: var(--green-button);
+}
+
+.green-button-hover {
+  background-color: var(--green-button-hover);
+}
+
+.body {
+  background-color: #5c6466;
+  color: #fff;
+  font-size: 24px;
+  padding: 20px;
+  border-bottom-left-radius: 38px;
+  border-bottom-right-radius: 38px;
+}
+
 body {
   background-color: #242728;
   font-family: sans-serif;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

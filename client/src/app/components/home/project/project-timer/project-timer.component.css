@@ -1,0 +1,28 @@
+.green-button:hover {
+  background-color: var(--green-button-hover);
+}
+
+.blue-button:hover {
+  background-color: var(--blue-button-hover);
+}
+
+.startStop {
+  background-color: var(--red-button);
+}
+
+.startStop:hover {
+  background-color: var(--red-button-hover);
+}
+
+.pauseResume {
+  background-color: var(--green-button);
+}
+
+.pauseResume:hover {
+  background-color: var(--green-button-hover);
+}
+
+.container-buttons {
+  display: flex;
+  padding: 10px 30%;
+}

@@ -20,6 +20,7 @@ import { ProjectBoardComponent } from './components/home/project/project-board/p
 import { MilestoneDetailsComponent } from './components/home/project/milestone-details/milestone-details.component';
 import { EditProjectDetailsComponent } from './components/home/project/project-details/edit-project-details/edit-project-details.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ProjectTimerComponent } from './components/home/project/project-timer/project-timer.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     ProjectDetailsComponent,
     ProjectBoardComponent,
     MilestoneDetailsComponent,
-    EditProjectDetailsComponent
+    EditProjectDetailsComponent,
+    ProjectTimerComponent
   ],
   imports: [
     BrowserModule,

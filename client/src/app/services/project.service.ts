@@ -29,8 +29,8 @@ export class ProjectService {
     this.getProjectEmitter.emit("User selected different project");
   }
 
-  getSelectedProject(cb) {
-    cb(this.project);
+  getSelectedProject() {
+    return this.project;
   }
 
   saveProjectDetails(

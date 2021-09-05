@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="header selected">
+    Timer
+  </div>
+  <div class="body">
+    <div>Current Session: {{ project.details.totalTimeActual.hours }} hrs {{ project.details.totalTimeActual.minutes }} min</div>
+    <div class="container-buttons">
+      <div class="button-small green-button startStop" [class.startStop]="startStop == 'Stop'" (click)="changeStartStop()">{{ startStop }}</div>
+      <div class="button-small blue-button pauseResume" [class.pauseResume]="pauseResume == 'Resume'" (click)="changePauseResume()">{{ pauseResume }}</div>
+    </div>
+  </div>
+</div>

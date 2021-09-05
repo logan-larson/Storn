@@ -47,7 +47,7 @@ input:focus {
 .submit {
   border-radius: 38px;
   color: #c7c7c7;
-  background-color: #304969;
+  background-color: var(--blue-button);
   font-size: 24px;
   padding: 10px 20px;
   width: fit-content;
@@ -56,7 +56,7 @@ input:focus {
 }
 
 .submit:hover {
-  background-color: #39567c;
+  background-color: var(--blue-button-hover);
   color: #fff;
   cursor: pointer;
 }

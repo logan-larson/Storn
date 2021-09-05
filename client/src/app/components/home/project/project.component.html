@@ -1,13 +1,15 @@
 <!-- Remove ngIfs when better solution is developed -->
 <div class="container">
   <div *ngIf="project" class="title">{{ project.details.name }}</div>
-  <div class="body">
+  <div 
+  class="body" 
+  *ngIf="project">
     <app-project-details
-    *ngIf="project"
     [project]="project"
     [details]="project.details"
     (removeProjectEmitter)="removeProject()"></app-project-details>
-    <app-project-board *ngIf="project" [board]="project.board"></app-project-board>
-    <app-milestone-details></app-milestone-details>
+    <app-project-timer [project]="project"></app-project-timer>
+    <!-- <app-project-board *ngIf="project" [board]="project.board"></app-project-board> -->
+    <!-- <app-milestone-details></app-milestone-details> -->
   </div>
 </div>
