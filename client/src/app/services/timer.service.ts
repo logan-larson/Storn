@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Message } from '../models/Message';
+import { Project } from '../models/Project';
 import { Session } from '../models/Session';
 import { ProjectService } from './project.service';
 
@@ -19,8 +21,32 @@ export class TimerService {
     }
     this.http.post('/api/v1/session/start', s)
       .subscribe((session: Session) => {
-        cb();
+        cb(session);
     });
+  }
+
+  pauseStart(s: Session, cb) {
+    this.http.put('/api/v1/session/pauseStart', s)
+      .subscribe((msg: Message) => {
+        cb(msg);
+      })
+  }
+
+  pauseEnd(s: Session, cb) {
+    this.http.put('/api/v1/session/pauseEnd', s)
+      .subscribe((msg: Message) => {
+        cb(msg);
+      })
+  }
+
+  endSession(s: Session, cb) {
+    this.http.put('/api/v1/session/end', s)
+      .subscribe((t: Number) => {
+        let p: Project = this.projectService.getSelectedProject();
+        p.details.totalTimeActual = t;
+        console.log(t);
+        cb(t);
+      })
   }
 
 }

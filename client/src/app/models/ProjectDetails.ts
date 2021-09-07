@@ -6,6 +6,6 @@ export interface ProjectDetails {
   description: String;
   dateStarted?: Date; 
   deadline: Date;
-  totalTimeEstimated: TimeModel;
-  totalTimeActual?: TimeModel;
+  totalTimeEstimated: Number;
+  totalTimeActual?: Number;
 }

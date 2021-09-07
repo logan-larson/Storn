@@ -28,15 +28,14 @@ export class EditProjectDetailsComponent implements OnInit {
     this.name = this.details.name;
     this.description = this.details.description;
     this.deadline = this.details.deadline;
-    this.timeHours = this.details.totalTimeEstimated.hours;
-    this.timeMinutes = this.details.totalTimeEstimated.minutes;
+    this.timeHours = Math.floor(Number(this.details.totalTimeEstimated) / 3600000);
+    this.timeMinutes = Math.floor((Number(this.details.totalTimeEstimated) - (Number(this.timeHours) * 3600000)) / 60000);
   }
 
   saveProjectDetails() {
-    let t: TimeModel = {
-      hours: this.timeHours,
-      minutes: this.timeMinutes
-    }
+    let t =
+      (Number(this.timeHours) * 3600000)
+      + (Number(this.timeMinutes) * 60000);
     let d: ProjectDetails = {
       name: this.name,
       description: this.description,

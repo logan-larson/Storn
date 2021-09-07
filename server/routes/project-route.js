@@ -33,6 +33,15 @@ router.get('/api/v1/projects/:classId', async (req, res) => {
   }
 });
 
+router.get('/api/v1/project/:projectId/sessions', async (req, res) => {
+  let sessions = await projectService.getSessions(req.params.projectId);
+
+  if (sessions) {
+    let time = projectService.calculateTotalTime(sessions);
+    res.json(time);
+  }
+});
+
 /**
  * GET returns project corresponding to projectId
  */
