@@ -7,49 +7,52 @@ import { TimerService } from 'src/app/services/timer.service';
 @Component({
   selector: 'app-project-timer',
   templateUrl: './project-timer.component.html',
-  styleUrls: ['./project-timer.component.css']
+  styleUrls: ['./project-timer.component.css'],
 })
 export class ProjectTimerComponent implements OnInit {
-
   @Input() project: Project;
 
-  startStop: String = "Start";
-  pauseResume: String = "Pause";
+  startStop: String = 'Start';
+  pauseResume: String = 'Pause';
   session: Session;
   hours: Number;
   minutes: Number;
 
-  constructor(private timerService: TimerService, private projectService: ProjectService) { }
+  constructor(
+    private timerService: TimerService,
+    private projectService: ProjectService
+  ) {}
 
   ngOnInit(): void {
+    this.project = this.projectService.getSelectedProject();
   }
 
   changeStartStop() {
-    if (this.startStop == "Start") {
+    if (this.startStop == 'Start') {
       this.timerService.createSession((session: Session) => {
         this.session = session;
-        this.startStop = "Stop";
+        this.startStop = 'Stop';
       });
     } else {
       this.session.end = new Date();
       this.timerService.endSession(this.session, () => {
-        this.startStop = "Start";
-      })
+        this.startStop = 'Start';
+      });
     }
   }
 
   changePauseResume() {
-    if (this.pauseResume == "Pause" && this.startStop == "Stop") {
+    if (this.pauseResume == 'Pause' && this.startStop == 'Stop') {
       this.session.pauseStart = new Date();
       this.timerService.pauseStart(this.session, () => {
-        this.pauseResume = "Resume";
-      })
+        this.pauseResume = 'Resume';
+      });
       // Change state to BE
-    } else if (this.pauseResume == "Resume" && this.startStop == "Stop") {
+    } else if (this.pauseResume == 'Resume' && this.startStop == 'Stop') {
       this.session.pauseEnd = new Date();
       this.timerService.pauseEnd(this.session, () => {
-        this.pauseResume = "Pause";
-      })
+        this.pauseResume = 'Pause';
+      });
     }
   }
 }
