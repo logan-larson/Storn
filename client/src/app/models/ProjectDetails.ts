@@ -1,10 +1,8 @@
-import { TimeModel } from "./TimeModel";
-
 export interface ProjectDetails {
-  _id?: String,
-  name: String,
+  _id?: String;
+  name: String;
   description: String;
-  dateStarted?: Date; 
+  dateStarted?: Date;
   deadline: Date;
   totalTimeEstimated: Number;
   totalTimeActual?: Number;
