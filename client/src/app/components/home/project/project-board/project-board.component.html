@@ -1,7 +1,11 @@
 <div class="container">
   <div class="header">Project Board</div>
-  <div class="body" cdkDropListGroup>
-    <div class="milestone-list"
+  <div 
+  *ngIf="board"
+  class="body"
+  cdkDropListGroup>
+    <div 
+    class="milestone-list"
     cdkDropList
     [cdkDropListData]="board.todoColumn"
     (cdkDropListDropped)="drop($event)">
@@ -17,7 +21,8 @@
       </div>
     </div>
 
-    <div class="milestone-list"
+    <div
+    class="milestone-list"
     cdkDropList
     [cdkDropListData]="board.doingColumn"
     (cdkDropListDropped)="drop($event)">
@@ -33,7 +38,8 @@
       </div>
     </div>
 
-    <div class="milestone-list"
+    <div
+    class="milestone-list"
     cdkDropList
     [cdkDropListData]="board.doneColumn"
     (cdkDropListDropped)="drop($event)">

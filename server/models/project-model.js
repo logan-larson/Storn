@@ -8,7 +8,7 @@ const ProjectBoardSchema =
 
 const projectSchema = new Schema({
   _id: mongoose.Schema.Types.ObjectId,
-  name: String,
+  classId: String,
   details: ProjectDetailsSchema,
   board: ProjectBoardSchema,
 });

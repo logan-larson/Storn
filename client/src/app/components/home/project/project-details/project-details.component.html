@@ -1,17 +1,43 @@
 <div class="container">
   <div class="header" [class.selected]="selected" (click)="changeSelected()">
-    Project Details
+    Details
   </div>
   <div *ngIf="selected" class="body">
     <div>Description: {{ details.description }}</div>
-    <div>Total Time Estimated: {{ details.totalTimeEstimated }}</div>
-    <div>Total Time Actual: {{ details.totalTimeActual }}</div>
+    <div>
+      Total Time Estimated:
+      {{ formatUnderTen(calculateHours(details.totalTimeEstimated)) }}:{{
+        formatUnderTen(calculateMinutes(details.totalTimeEstimated))
+      }}:{{ formatUnderTen(calculateSeconds(details.totalTimeEstimated)) }}
+    </div>
+    <div *ngIf="details.totalTimeActual">
+      Total Time Actual:
+      {{ formatUnderTen(calculateHours(details.totalTimeActual)) }}:{{
+        formatUnderTen(calculateMinutes(details.totalTimeActual))
+      }}:{{ formatUnderTen(calculateSeconds(details.totalTimeActual)) }}
+    </div>
     <div>Deadline: {{ details.deadline }}</div>
-    <div id="editProjectDetails" class="button" (click)="showEditProjectDetailsComponent = true">
+    <div
+      id="editProjectDetails"
+      class="button"
+      (click)="showEditProjectDetailsComponent = true"
+    >
       Edit Project Details
+    </div>
+    <div
+      id="removeProjectButton"
+      class="button red"
+      (click)="removeProject()"
+      style="margin-top: 10px"
+    >
+      Remove Project
     </div>
   </div>
   <div *ngIf="showEditProjectDetailsComponent">
-    <app-edit-project-details [class]="class" (close)="showEditProjectDetailsComponent = false"></app-edit-project-details>
+    <app-edit-project-details
+      [project]="project"
+      [details]="details"
+      (close)="showEditProjectDetailsComponent = false"
+    ></app-edit-project-details>
   </div>
 </div>

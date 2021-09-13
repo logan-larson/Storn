@@ -21,6 +21,13 @@
   padding: 20px 75px;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 24px;
+  margin-right: 5px;
 }
 
 input {
@@ -28,6 +35,9 @@ input {
   border-radius: 24px;
   border-width: 0px;
   padding: 10px 20px;
+  margin-bottom: 10px;
+  float: right;
+  width: 40%;
 }
 
 input:focus {
@@ -37,16 +47,33 @@ input:focus {
 .submit {
   border-radius: 38px;
   color: #c7c7c7;
-  background-color: #304969;
+  background-color: var(--blue-button);
   font-size: 24px;
-  padding: 20px;
+  padding: 10px 20px;
   width: fit-content;
-  margin: 10px auto;
+  margin: 5px auto;
   text-align: center;
 }
 
 .submit:hover {
-  background-color: #39567c;
+  background-color: var(--blue-button-hover);
+  color: #fff;
+  cursor: pointer;
+}
+
+.cancel {
+  border-radius: 38px;
+  color: #c7c7c7;
+  background-color: #861e1e;
+  font-size: 24px;
+  padding: 10px 20px;
+  width: fit-content;
+  margin: 5px auto;
+  text-align: center;
+}
+
+.cancel:hover {
+  background-color: #9e2828;
   color: #fff;
   cursor: pointer;
 }

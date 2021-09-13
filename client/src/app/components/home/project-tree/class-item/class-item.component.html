@@ -1,16 +1,19 @@
 <div class="container">
   <div class="name" [class.selected]="selected" (click)="changeView()">
-    {{ class.name }}
+    {{ classItem.name }}
   </div>
   <div *ngIf="selected" class="project-list">
-    <div *ngFor="let project of class.projects">
+    <div *ngFor="let project of projects">
       <app-project-item [project]="project"></app-project-item>
     </div>
     <div id="addProjectButton" class="button" (click)="addProject()">
       Add Project
     </div>
+    <div id="removeClassButton" class="button red" (click)="removeClass()">
+      Remove Class
+    </div>
   </div>
 </div>
 <div *ngIf="showAddProjectComponent">
-  <app-add-project [class]="class" (close)="closeAddProject($event)"></app-add-project>
+  <app-add-project [classItem]="classItem" (close)="closeAddProject($event)"></app-add-project>
 </div>

@@ -1,6 +1,9 @@
 export interface ProjectDetails {
-  description: string;
-  totalTimeEstimated: number;
-  totalTimeActual: number;
-  deadline: number;
+  _id?: String;
+  name: String;
+  description: String;
+  dateStarted?: Date;
+  deadline: Date;
+  totalTimeEstimated: Number;
+  totalTimeActual?: Number;
 }

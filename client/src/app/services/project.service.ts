@@ -1,5 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
+import { ClassItem } from '../models/ClassItem';
+import { Message } from '../models/Message';
 import { Project } from '../models/Project';
+import { ProjectDetails } from '../models/ProjectDetails';
 
 @Injectable({
   providedIn: 'root'
@@ -8,45 +12,87 @@ export class ProjectService {
   
   // Needs renaming to more intuitive names
 
-  projects: Project[] = [
-    { 
-      id: "1", 
-      name: "DeckBuilder", 
-      details: { 
-        description: "This is a description!",
-        totalTimeEstimated: 45,
-        totalTimeActual: 30,
-        deadline: 69
-      },
-      board: {
-        todoColumn: [{name: "Milestone 3"}],
-        doingColumn: [{name: "Milestone 2"}],
-        doneColumn: [{name: "Milestone 1"}]
-      }
-    },
-    { id: "2", name: "WeatherList" },
-    { id: "3", name: "FinalProject" },
-    { id: "4", name: "FinalExam" },
-  ];
+  projects: Project[] = [];
 
   project: Project = this.projects[0];
 
-  getProject: EventEmitter<string> = new EventEmitter<string>();
+  getProjectEmitter: EventEmitter<string> = new EventEmitter<string>();
+  getProjectsEmitter: EventEmitter<string> = new EventEmitter<string>();
+  updateDetailsEmitter: EventEmitter<String> = new EventEmitter<String>();
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   setSelectedProject(id: string) {
-    this.project = this.projects.find((project) => project.id == id);
+
+    this.project = this.projects.find((project) => project._id == id);
     
-    this.getProject.emit("User selected different project");
+    this.getProjectEmitter.emit("User selected different project");
   }
 
-  getSelectedProject(cb) {
-    // Pull project from database
-    cb(this.project);
+  getSelectedProject() {
+    return this.project;
   }
 
-  saveProjectDetails(cb) {
-    cb("saved");
+  saveProjectDetails(
+    _id: String,
+    details: ProjectDetails,
+    cb) {
+
+      this.http.put('/api/v1/project/details', { 
+        _id: _id,
+        details: details
+      }).subscribe((msg: Message) => {
+        this.updateDetailsEmitter.emit(_id);
+        cb("saved");
+      });
+  }
+
+  addProject(classItem: ClassItem, projectName: String, cb) {
+    this.http.post(`/api/v1/project`, { id: classItem._id, projectName: projectName })
+      .subscribe((project: Project) => {
+        // push project into projects list
+        this.projects.push(project);
+        this.setSelectedProject(project._id);
+
+        cb(project);
+      })
+  }
+
+  getProjects(classItem: ClassItem, cb) {
+    this.http.get(`/api/v1/projects/${classItem._id}`)
+      .subscribe((projects: Project[]) => {
+        this.projects = projects;
+        cb(projects);
+
+      })
+  }
+
+  getProjectById(id: String, cb) {
+    this.http.get(`/api/v1/project/${id}`)
+    .subscribe((project: Project) => {
+      cb(project);
+    });
+  }
+
+  deleteProject(project: Project, cb) {
+    if (confirm(`Are you sure you want to delete ${project.details.name}?`)) {
+      this.http
+        .request('delete', '/api/v1/project', { body: project })
+        .subscribe((deletedProject: Message) => {
+          this.projects = this.projects.filter(p => p != project);
+          this.getProjectsEmitter.emit("get the projects");
+          this.project = this.projects[0];
+
+          if (!this.project) {
+            this.project = null;
+            this.getProjectEmitter.emit("get null project");
+            cb();
+            return;
+          }
+
+          this.setSelectedProject(this.project._id);
+          cb();
+        })
+    }
   }
 }

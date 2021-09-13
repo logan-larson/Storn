@@ -3,13 +3,13 @@
   <div class="title">Project Tree</div>
   <div class="list">
     <div *ngFor="let class of classes" class="list-item">
-      <app-class-item [class]="class"></app-class-item>
+      <app-class-item [classItem]="class" (deletedClass)="removeClass($event)"></app-class-item>
     </div>
     <div id="addClassButton" class="button" (click)="showAddClassComponent = true">
       Add Class
     </div>
   </div>
   <div *ngIf="showAddClassComponent">
-    <app-add-class (close)="showAddClassComponent = false"></app-add-class>
+    <app-add-class (close)="showAddClassComponent = false; getClasses()"></app-add-class>
   </div>
 </div>

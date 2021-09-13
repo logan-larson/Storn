@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Project } from 'src/app/models/Project';
-import { ProjectItem } from 'src/app/models/ProjectItem';
 import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
@@ -10,27 +9,36 @@ import { ProjectService } from 'src/app/services/project.service';
 })
 export class ProjectComponent implements OnInit {
 
-  projectItem: ProjectItem;
-  project: Project;
+  project: Project = null;
 
   constructor(private projectService: ProjectService) { 
     // Can rename in future
     // Lets component know when user switches projects
-    this.projectService.getProject.subscribe(() => {
+    this.projectService.getProjectEmitter.subscribe(() => {
       this.getProject();
-    }) 
+    });
+
+    this.projectService.updateDetailsEmitter.subscribe((id) => {
+      this.projectService.getProjectById(id, (project) => {
+        this.project = project;
+      });
+    })
   }
 
   ngOnInit(): void {
+    /*
     this.projectService.getSelectedProject((project) => {
       this.project = project;
     });
+    */
   }
 
   getProject() {
-    this.projectService.getSelectedProject((project) => {
-      this.project = project;
-    });
+    this.project = this.projectService.getSelectedProject();
   }
 
+  removeProject() {
+    this.projectService.deleteProject(this.project, () => {
+    })
+  }
 }

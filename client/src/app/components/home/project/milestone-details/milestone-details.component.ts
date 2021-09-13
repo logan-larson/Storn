@@ -9,7 +9,7 @@ import { MilestoneService } from 'src/app/services/milestone.service';
 })
 export class MilestoneDetailsComponent implements OnInit {
 
-  milestone: Milestone;
+  milestone: Milestone = {name: 'Test'};
 
   constructor(private milestoneService: MilestoneService) {
     this.milestoneService.getMilestone.subscribe(() => {

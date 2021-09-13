@@ -1,6 +1,8 @@
-import { ProjectItem } from './ProjectItem';
+import { Project } from './Project';
 
 export interface ClassItem {
-  name: string;
-  projects: ProjectItem[];
+  _id: String;
+  userId: String;
+  name: String;
+  color: String;
 }

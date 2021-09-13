@@ -15,9 +15,15 @@ app.use(
 
 const authRouter = require('./routes/auth-route');
 const userRouter = require('./routes/user-route');
+const classRouter = require('./routes/class-route');
+const projectRouter = require('./routes/project-route');
+const sessionRouter = require('./routes/session-route');
 
 app.use('/', authRouter);
 app.use('/', userRouter);
+app.use('/', classRouter);
+app.use('/', projectRouter);
+app.use('/', sessionRouter);
 
 mongoose
   .connect(

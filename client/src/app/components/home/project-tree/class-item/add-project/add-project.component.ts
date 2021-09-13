@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, HostListener } from '@angular/core';
 import { ClassItem } from 'src/app/models/ClassItem';
+import { ProjectService } from 'src/app/services/project.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class AddProjectComponent implements OnInit {
 
-  @Input() class: ClassItem;
+  @Input() classItem: ClassItem;
   @Input() projectName: string;
 
   @Output() close: EventEmitter<any> = new EventEmitter();
@@ -24,20 +25,18 @@ export class AddProjectComponent implements OnInit {
       && event.target != document.getElementById('addProject')
       && event.target != document.getElementById('addProjectButton')
     ) {
-      console.log(event.target);
       this.close.emit("close me");
     }
   }
 
-  constructor(private userService: UserService) { }
+  constructor(private projectService: ProjectService) { }
 
   ngOnInit(): void {
     // Focus on input
   }
 
   addProject() {
-
-    this.userService.addProject(this.class, this.projectName, () => {
+    this.projectService.addProject(this.classItem, this.projectName, () => {
       this.close.emit("close me");
     });
   }
