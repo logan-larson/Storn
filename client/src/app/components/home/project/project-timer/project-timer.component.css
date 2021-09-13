@@ -26,3 +26,10 @@
   display: flex;
   padding: 10px 30%;
 }
+
+.currentSession {
+  font-size: 36px;
+  margin: auto;
+  width: 50%;
+  text-align: center;
+}

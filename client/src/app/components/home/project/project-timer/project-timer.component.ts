@@ -17,6 +17,7 @@ export class ProjectTimerComponent implements OnInit {
   pauseResume: String = 'Pause';
   session: Session;
   previousSession: number = 0;
+  currentSession: number = 0;
 
   constructor(
     private timerService: TimerService,
@@ -26,6 +27,7 @@ export class ProjectTimerComponent implements OnInit {
 
   ngOnInit(): void {
     this.project = this.projectService.getSelectedProject();
+    this.runTimer();
   }
 
   changeStartStop() {
@@ -39,6 +41,8 @@ export class ProjectTimerComponent implements OnInit {
       this.timerService.endSession(this.session, (t) => {
         this.previousSession = t;
         this.startStop = 'Start';
+        this.pauseResume = 'Pause';
+        this.resetCurrentSession();
       });
     }
   }
@@ -56,5 +60,18 @@ export class ProjectTimerComponent implements OnInit {
         this.pauseResume = 'Pause';
       });
     }
+  }
+
+  runTimer() {
+    if (this.startStop == 'Stop' && this.pauseResume == 'Pause') {
+      this.currentSession += 1000;
+    }
+    setTimeout(() => {
+      this.runTimer();
+    }, 1000);
+  }
+
+  resetCurrentSession() {
+    this.currentSession = 0;
   }
 }

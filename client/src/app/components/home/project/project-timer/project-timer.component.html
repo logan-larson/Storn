@@ -4,6 +4,9 @@
     <div>
       Previous Session: {{ this.timeService.formatTime(previousSession) }}
     </div>
+    <div class="currentSession">
+      {{ this.timeService.formatTime(currentSession) }}
+    </div>
     <div class="container-buttons">
       <div
         class="button-small green-button startStop"
