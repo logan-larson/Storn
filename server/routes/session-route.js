@@ -36,7 +36,12 @@ router.put('/api/v1/session/end', async (req, res) => {
 
 	projectService.updateProjectDetails(req.body.projectId, details);
 
-	res.json(totalTime);
+	let timeObj = {
+		totalTime: totalTime,
+		sessionTime: t,
+	};
+
+	res.json(timeObj);
 });
 
 module.exports = router;

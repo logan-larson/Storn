@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Project } from 'src/app/models/Project';
 import { Session } from 'src/app/models/Session';
 import { ProjectService } from 'src/app/services/project.service';
+import { TimeService } from 'src/app/services/time.service';
 import { TimerService } from 'src/app/services/timer.service';
 
 @Component({
@@ -15,12 +16,12 @@ export class ProjectTimerComponent implements OnInit {
   startStop: String = 'Start';
   pauseResume: String = 'Pause';
   session: Session;
-  hours: Number;
-  minutes: Number;
+  previousSession: number = 0;
 
   constructor(
     private timerService: TimerService,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    public timeService: TimeService
   ) {}
 
   ngOnInit(): void {
@@ -35,7 +36,8 @@ export class ProjectTimerComponent implements OnInit {
       });
     } else {
       this.session.end = new Date();
-      this.timerService.endSession(this.session, () => {
+      this.timerService.endSession(this.session, (t) => {
+        this.previousSession = t;
         this.startStop = 'Start';
       });
     }

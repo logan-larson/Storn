@@ -6,15 +6,35 @@
     <div>Description: {{ details.description }}</div>
     <div>
       Total Time Estimated:
-      {{ formatUnderTen(calculateHours(details.totalTimeEstimated)) }}:{{
-        formatUnderTen(calculateMinutes(details.totalTimeEstimated))
-      }}:{{ formatUnderTen(calculateSeconds(details.totalTimeEstimated)) }}
+      {{
+        this.timeService.formatUnderTen(
+          this.timeService.calculateHours(details.totalTimeEstimated)
+        )
+      }}:{{
+        this.timeService.formatUnderTen(
+          this.timeService.calculateMinutes(details.totalTimeEstimated)
+        )
+      }}:{{
+        this.timeService.formatUnderTen(
+          this.timeService.calculateSeconds(details.totalTimeEstimated)
+        )
+      }}
     </div>
     <div *ngIf="details.totalTimeActual">
       Total Time Actual:
-      {{ formatUnderTen(calculateHours(details.totalTimeActual)) }}:{{
-        formatUnderTen(calculateMinutes(details.totalTimeActual))
-      }}:{{ formatUnderTen(calculateSeconds(details.totalTimeActual)) }}
+      {{
+        this.timeService.formatUnderTen(
+          this.timeService.calculateHours(details.totalTimeActual)
+        )
+      }}:{{
+        this.timeService.formatUnderTen(
+          this.timeService.calculateMinutes(details.totalTimeActual)
+        )
+      }}:{{
+        this.timeService.formatUnderTen(
+          this.timeService.calculateSeconds(details.totalTimeActual)
+        )
+      }}
     </div>
     <div>Deadline: {{ details.deadline }}</div>
     <div
