@@ -44,12 +44,12 @@ export class EditProjectDetailsComponent implements OnInit {
 
   saveProjectDetails() {
     let t = Number(this.timeHours) * 3600000 + Number(this.timeMinutes) * 60000;
-    let d: ProjectDetails = {
-      name: this.name,
-      description: this.description,
-      deadline: this.deadline,
-      totalTimeEstimated: t,
-    };
+    let d: ProjectDetails = this.details;
+    d.name = this.name;
+    d.description = this.description;
+    d.deadline = this.deadline;
+    d.totalTimeEstimated = t;
+
     this.projectService.saveProjectDetails(this.project._id, d, () => {
       this.close.emit('close me');
     });
