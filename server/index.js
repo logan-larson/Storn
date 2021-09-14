@@ -2,7 +2,7 @@ const express = require('express');
 const session = require('cookie-session');
 const path = require('path');
 const app = express();
-const port = 5000;
+const port = process.env.port || 5000;
 
 const cookieSecret = 'thisisthecookiesecret';
 
