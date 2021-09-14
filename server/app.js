@@ -1,13 +1,17 @@
 const express = require('express');
+const cors = require('cors');
+
 const session = require('cookie-session');
 const path = require('path');
 const app = express();
+
 const port = process.env.port || 5000;
 
 const cookieSecret = 'thisisthecookiesecret';
 
 const mongoose = require('mongoose');
 
+app.use(cors({ orgin: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(
 	session({
