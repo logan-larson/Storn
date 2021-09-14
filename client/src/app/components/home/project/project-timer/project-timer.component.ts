@@ -38,6 +38,7 @@ export class ProjectTimerComponent implements OnInit {
       });
     } else {
       this.session.end = new Date();
+
       this.timerService.endSession(this.session, (t) => {
         this.previousSession = t;
         this.startStop = 'Start';
@@ -56,7 +57,8 @@ export class ProjectTimerComponent implements OnInit {
       // Change state to BE
     } else if (this.pauseResume == 'Resume' && this.startStop == 'Stop') {
       this.session.pauseEnd = new Date();
-      this.timerService.pauseEnd(this.session, () => {
+      this.timerService.pauseEnd(this.session, (t) => {
+        this.session.totalPauseTime = t;
         this.pauseResume = 'Pause';
       });
     }

@@ -33,8 +33,10 @@ export class TimerService {
   }
 
   pauseEnd(s: Session, cb) {
-    this.http.put('/api/v1/session/pauseEnd', s).subscribe((msg: Message) => {
-      cb(msg);
+    console.log(`session._id: ${s._id}`);
+    this.http.put('/api/v1/session/pauseEnd', s).subscribe((t: Number) => {
+      console.log(t);
+      cb(t);
     });
   }
 

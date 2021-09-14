@@ -18,7 +18,7 @@ router.put('/api/v1/session/pauseStart', async (req, res) => {
 
 router.put('/api/v1/session/pauseEnd', async (req, res) => {
 	let s = await sessionService.pauseEnd(req.body);
-	res.send(s);
+	res.json(s);
 });
 
 router.put('/api/v1/session/end', async (req, res) => {

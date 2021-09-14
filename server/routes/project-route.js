@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const projectService = require('../services/project-service');
+const sessionService = require('../services/session-service');
 
 router.use(express.json());
 
@@ -9,75 +10,76 @@ router.use(express.json());
  * POST to create a new project
  */
 router.post('/api/v1/project', async (req, res) => {
-  let newProject = await projectService.saveNewProject(
-    req.body.projectName,
-    req.body.id
-  );
+	let newProject = await projectService.saveNewProject(
+		req.body.projectName,
+		req.body.id
+	);
 
-  if (!newProject.err) {
-    res.json(newProject);
-    return;
-  }
+	if (!newProject.err) {
+		res.json(newProject);
+		return;
+	}
 
-  res.status(500).json(newProject);
+	res.status(500).json(newProject);
 });
 
 /**
  * GET returns list of projects associated with a user
  */
 router.get('/api/v1/projects/:classId', async (req, res) => {
-  let projects = await projectService.getProjects(req.params.classId);
+	let projects = await projectService.getProjects(req.params.classId);
 
-  if (projects) {
-    res.json(projects);
-  }
+	if (projects) {
+		res.json(projects);
+	}
 });
 
 router.get('/api/v1/project/:projectId/sessions', async (req, res) => {
-  let sessions = await projectService.getSessions(req.params.projectId);
+	let sessions = await projectService.getSessions(req.params.projectId);
 
-  if (sessions) {
-    let time = projectService.calculateTotalTime(sessions);
-    res.json(time);
-  }
+	if (sessions) {
+		let time = projectService.calculateTotalTime(sessions);
+		res.json(time);
+	}
 });
 
 /**
  * GET returns project corresponding to projectId
  */
 router.get('/api/v1/project/:projectId', async (req, res) => {
-  let project = await projectService.getProject(req.params.projectId);
+	let project = await projectService.getProject(req.params.projectId);
 
-  if (project) {
-    res.json(project);
-  }
+	if (project) {
+		res.json(project);
+	}
 });
 
 /**
  * DELETE to delete a class
  */
 router.delete('/api/v1/project', async (req, res) => {
-  // TODO: Error catching for bad requests
+	// TODO: Error catching for bad requests
 
-  let deletedProject = await projectService.deleteProject(req.body._id);
+	let deletedProject = await projectService.deleteProject(req.body._id);
+	let deletedSessions = await sessionService.deleteSessions(req.body._id);
 
-  // ERROR checking is not working as of 8/24
-  //if (!deletedProject.err) {
-  //res.json(deletedProject);
-  //return;
-  //}
+	// ERROR checking is not working as of 8/24
+	//if (!deletedProject.err) {
+	//res.json(deletedProject);
+	//return;
+	//}
 
-  res.json(deletedProject);
-  // res.status(500).json(deletedProject);
+	res.json(deletedProject);
+	// res.status(500).json(deletedProject);
 });
 
 router.put('/api/v1/project/details', async (req, res) => {
-  let updatedProjectDetails = await projectService.updateProjectDetails(
-    req.body._id,
-    req.body.details
-  );
+	let updatedProjectDetails = await projectService.updateProjectDetails(
+		req.body._id,
+		req.body.details
+	);
 
-  res.json(updatedProjectDetails);
+	res.json(updatedProjectDetails);
 });
 
 module.exports = router;
