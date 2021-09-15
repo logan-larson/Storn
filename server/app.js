@@ -9,6 +9,7 @@ const cookieSecret = 'thisisthecookiesecret';
 
 const mongoose = require('mongoose');
 
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(
 	session({
 		secret: cookieSecret,
@@ -20,10 +21,6 @@ const userRouter = require('./routes/user-route');
 const classRouter = require('./routes/class-route');
 const projectRouter = require('./routes/project-route');
 const sessionRouter = require('./routes/session-route');
-
-app.get('/', (req, res, next) => {
-	res.status(200).sendFile(path.join(process.cwd(), 'public', 'index.html'));
-});
 
 app.use('/', authRouter);
 app.use('/', userRouter);
