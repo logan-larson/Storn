@@ -20,8 +20,24 @@ export class AuthService {
     // Pull client id from server
     let githubClientId: string = 'd0a4be1267ced10edef1';
 
-    this.document.location.href = `https://github.com/login/oauth/authorize?client_id=${githubClientId}`;
+    //this.document.location.href = `https://github.com/login/oauth/authorize?client_id=${githubClientId}`;
     console.log('navigating to github auth\n');
+    this.http.get(`/api/v1/github/login?${githubClientId}`).subscribe(() => {
+      this.router.navigateByUrl('/home');
+    });
+  }
+
+  loginWithGithubId() {
+    // Navigate to github authorization page
+
+    // Pull client id from server
+    let githubId: string = '61062214';
+
+    //this.document.location.href = `https://github.com/login/oauth/authorize?client_id=${githubClientId}`;
+    console.log('navigating to github auth\n');
+    this.http.get(`/api/v1/github/login?id=${githubId}`).subscribe(() => {
+      this.router.navigateByUrl('/home');
+    });
   }
 
   setGithubCode(code: string) {
