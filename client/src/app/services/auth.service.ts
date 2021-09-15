@@ -21,12 +21,13 @@ export class AuthService {
     let githubClientId: string = 'd0a4be1267ced10edef1';
 
     this.document.location.href = `https://github.com/login/oauth/authorize?client_id=${githubClientId}`;
+    console.log('navigating to github auth\n');
   }
 
   setGithubCode(code: string) {
     // This is triggered by the initialization of the github/callback component
     // On response the user is sent to home
-
+    console.log(`setting code: ${code}\n`);
     this.http
       .post(`/api/v1/auth/github/callback`, { code: code })
       .subscribe((res: Message) => {
