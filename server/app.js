@@ -3,13 +3,12 @@ const session = require('cookie-session');
 const path = require('path');
 const app = express();
 
-const port = process.env.port || 5000;
+const port = process.env.port || 8080;
 
 const cookieSecret = 'thisisthecookiesecret';
 
 const mongoose = require('mongoose');
 
-app.use(express.static(path.join(__dirname, 'public')));
 app.use(
 	session({
 		secret: cookieSecret,
@@ -43,7 +42,7 @@ mongoose
 	)
 	.then((client) => {
 		app.listen(port, () => {
-			console.log(`Server started at http://localhost:${port}`);
+			console.log(`Server started on port: ${port}`);
 		});
 	})
 	.catch((err) => console.log(err));
