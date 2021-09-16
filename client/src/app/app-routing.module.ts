@@ -5,12 +5,12 @@ import { AuthComponent } from 'src/app/components/auth/auth.component';
 import { CallbackGithubComponent } from 'src/app/components/auth/callback-github/callback-github.component';
 
 const routes: Routes = [
-  { 
-    path: 'home', 
+  {
+    path: 'home',
     component: HomeComponent,
   },
-  { 
-    path: 'auth', 
+  {
+    path: 'auth',
     component: AuthComponent,
   },
   /*
@@ -21,16 +21,15 @@ const routes: Routes = [
     path: 'auth/callback/github',
     component: CallbackGithubComponent,
   },
-  { 
-    path: '', 
+  {
+    path: '',
     redirectTo: '/home',
     pathMatch: 'full',
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  exports: [RouterModule],
 })
-
-export class AppRoutingModule { }
+export class AppRoutingModule {}
