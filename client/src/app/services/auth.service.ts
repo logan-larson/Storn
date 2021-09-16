@@ -50,6 +50,7 @@ export class AuthService {
       .post('/api/v1/auth/login', { username: username, password: password })
       .subscribe((res: Message) => {
         if (res.err) {
+          alert(res.err);
           this.router.navigateByUrl('/auth');
         } else {
           this.router.navigateByUrl('/home');
@@ -57,7 +58,18 @@ export class AuthService {
       });
   }
 
-  register(username: string, password: string) {}
+  register(username: string, password: string) {
+    this.http
+      .post('/api/v1/auth/register', { username: username, password: password })
+      .subscribe((res: Message) => {
+        if (res.err) {
+          alert(res.err);
+          this.router.navigateByUrl('/auth');
+        } else {
+          this.router.navigateByUrl('/home');
+        }
+      });
+  }
 
   logout() {
     this.http.post('/api/v1/auth/logout', '').subscribe((res: Message) => {

@@ -11,7 +11,7 @@ router.use(express.json());
 
 router.post('/api/v1/auth/login', async (req, res) => {
 	// Find user, if no user send back error
-	let u = await user.findUserByUsername(req.body.username);
+	let u = await user.findByUsername(req.body.username);
 
 	if (!u) {
 		res.json({ err: 'Username does not exist' });
@@ -29,6 +29,26 @@ router.post('/api/v1/auth/login', async (req, res) => {
 	res.json({ msg: 'Logged in' });
 });
 
+router.post('/api/v1/auth/register', async (req, res) => {
+	// Check if user exists, if so send error
+	let u = await user.findByUsername(req.body.username);
+
+	if (u) {
+		res.json({ err: 'Username is taken' });
+		return;
+	}
+
+	// Create new user
+	let userId = await user.createNewUser(req.body.username, req.body.password);
+
+	// Set session to user._id
+	console.log(userId);
+	req.session.id = userId;
+
+	// Respond nominal
+	res.json({ msg: 'Registered new user' });
+});
+
 router.all('/api/v1/*', async (req, res, next) => {
 	// Lookup req.session.githubId in mongo
 	// If exists, allow user entry
@@ -36,8 +56,6 @@ router.all('/api/v1/*', async (req, res, next) => {
 	if (req.session) {
 		let u = await user.findUserById(req.session.id);
 
-		console.log('user: ');
-		console.log(u);
 		if (u) {
 			next();
 		} else {
@@ -61,8 +79,6 @@ router.get('/api/v1/auth/validate', async (req, res) => {
 	if (req.session.id) {
 		// If it exists, attempt to find user in mongo
 		let u = await user.findUserById(req.session.id);
-		console.log('user: ');
-		console.log(u);
 		if (u) {
 			res.json({ msg: 'Authorized' });
 		} else {

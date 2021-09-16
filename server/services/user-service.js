@@ -7,11 +7,11 @@ async function findUserByGithubId(id) {
 
 module.exports.findUserByGithubId = findUserByGithubId;
 
-async function findUserByUsername(username) {
+async function findByUsername(username) {
 	return await User.UserModel.findOne({ username: username });
 }
 
-module.exports.findUserByUsername = findUserByUsername;
+module.exports.findByUsername = findByUsername;
 
 async function findUserById(id) {
 	let githubUser = await findUserByGithubId(id);
@@ -33,9 +33,26 @@ async function findUserById(id) {
 
 module.exports.findUserById = findUserById;
 
-async function saveNewUser(name, githubId) {
+async function createNewUser(username, password) {
+	let id = new mongoose.Types.ObjectId();
 	const user = new User.UserModel({
-		_id: new mongoose.Types.ObjectId(),
+		_id: id,
+		username: username,
+		password: password,
+	});
+
+	await user.save();
+
+	return id;
+}
+
+module.exports.createNewUser = createNewUser;
+
+/*
+async function saveNewUser(name, githubId) {
+	let id = new mongoose.Types.ObjectId();
+	const user = new User.UserModel({
+		_id: id,
 		githubId: githubId,
 		githubClientId: null,
 		githubClientSecret: null,
@@ -44,11 +61,14 @@ async function saveNewUser(name, githubId) {
 
 	user.save((err, result) => {
 		if (err) {
+			console.log('error');
 			return err;
 		} else {
-			return result;
+			console.log('nominal');
+			return id;
 		}
 	});
 }
 
 module.exports.saveNewUser = saveNewUser;
+*/
