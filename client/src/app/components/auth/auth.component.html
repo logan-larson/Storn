@@ -1,10 +1,25 @@
 <div class="container">
-  <div class="header">Authorization</div>
+  <div class="header selected">Authorization</div>
   <div class="content">
-    <div class="button" (click)="loginWithGithub()">
+    <!-- <div class="button" (click)="loginWithGithub()">
       Login with Github
-      <!-- Add Github Logo -->
     </div>
-    <div class="button" (click)="loginWithGithubId()">Login</div>
+  -->
+    <div class="container-input">
+      <input
+        type="text"
+        placeholder="Username"
+        name="username"
+        [(ngModel)]="username"
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        name="password"
+        [(ngModel)]="password"
+      />
+    </div>
+    <div class="button blue" (click)="login()">Login</div>
+    <div class="button green" (click)="register()">Register</div>
   </div>
 </div>

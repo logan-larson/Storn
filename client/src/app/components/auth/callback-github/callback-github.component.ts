@@ -18,6 +18,6 @@ export class CallbackGithubComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.setGithubCode(this.code);
+    //this.authService.setGithubCode(this.code);
   }
 }

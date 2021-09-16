@@ -7,12 +7,78 @@ const fetch = require('node-fetch');
 const session = require('cookie-session');
 
 const user = require('../services/user-service');
+router.use(express.json());
 
+router.post('/api/v1/auth/login', async (req, res) => {
+	// Find user, if no user send back error
+	let u = await user.findUserByUsername(req.body.username);
+
+	if (!u) {
+		res.json({ err: 'Username does not exist' });
+		return;
+	}
+	// Check if password match user's password, if not send back error
+	if (u.password != req.body.password) {
+		res.json({ err: 'Incorrect password' });
+		return;
+	}
+	// Set session to user._id
+	req.session.id = u._id;
+
+	// Respond nominal
+	res.json({ msg: 'Logged in' });
+});
+
+router.all('/api/v1/*', async (req, res, next) => {
+	// Lookup req.session.githubId in mongo
+	// If exists, allow user entry
+	// else refer back to auth
+	if (req.session) {
+		let u = await user.findUserById(req.session.id);
+
+		console.log('user: ');
+		console.log(u);
+		if (u) {
+			next();
+		} else {
+			res.json({ err: 'Unauthorized' });
+		}
+	} else {
+		res.json({ err: 'Unauthorized access' });
+	}
+});
+
+router.post('/api/v1/auth/logout', (req, res) => {
+	req.session = null;
+	res.json({ msg: 'Logout success' });
+});
+
+router.get('/api/v1/auth/validate', async (req, res) => {
+	// Validate credentials
+
+	// Further validation required but for now it is fine
+
+	if (req.session.id) {
+		// If it exists, attempt to find user in mongo
+		let u = await user.findUserById(req.session.id);
+		console.log('user: ');
+		console.log(u);
+		if (u) {
+			res.json({ msg: 'Authorized' });
+		} else {
+			res.json({ err: 'Unauthorized' });
+		}
+	} else {
+		res.json({ err: 'Unauthorized' });
+	}
+});
+
+module.exports = router;
+
+/*
 const githubClientId = 'd0a4be1267ced10edef1';
 const githubClientSecret = '4a8547355631aa4dc0f55186ff56e3adad2a7c3b';
 const cookieSecret = 'thisisthecookiesecret';
-
-router.use(express.json());
 
 // Github access token
 async function getAccessToken(code) {
@@ -66,7 +132,7 @@ router.get('/api/v1/github/login', async (req, res) => {
 	res.json({ msg: 'Valid authentication' });
 });
 
-/*
+
 // Github auth entry
 router.post('/api/v1/github/login', async (req, res) => {
 	const code = req.params.code;
@@ -91,45 +157,3 @@ router.post('/api/v1/github/login', async (req, res) => {
 	}
 });
 */
-
-router.all('/api/v1/*', async (req, res, next) => {
-	// Lookup req.session.githubId in mongo
-	// If exists, allow user entry
-	// else refer back to auth
-
-	if (req.session) {
-		let u = await user.findUserByGithubId(req.session.githubId);
-		if (u) {
-			next();
-		} else {
-			res.json({ err: 'Unauthorized' });
-		}
-	} else {
-		res.json({ err: 'Unauthorized access' });
-	}
-});
-
-router.post('/api/v1/auth/github/logout', (req, res) => {
-	req.session = null;
-	res.json({ msg: 'Logout success' });
-});
-
-router.get('/api/v1/auth/github/validate', async (req, res) => {
-	// Validate credentials
-
-	// Further validation required but for now it is fine
-
-	if (req.session.githubId) {
-		// If it exists, attempt to find user in mongo
-		let u = await user.findUserByGithubId(req.session.githubId);
-		if (u) {
-			res.json({ msg: 'Authorized' });
-		} else {
-			res.json({ err: 'Unauthorized' });
-		}
-	} else {
-		res.json({ err: 'Unauthorized' });
-	}
-});
-
-module.exports = router;

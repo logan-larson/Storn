@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -7,15 +7,23 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./auth.component.css'],
 })
 export class AuthComponent implements OnInit {
+  @Input() username: string;
+  @Input() password: string;
+
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {}
 
   loginWithGithub() {
-    this.authService.loginWithGithub();
+    //this.authService.loginWithGithub();
   }
 
-  loginWithGithubId() {
-    this.authService.loginWithGithubId();
+  login() {
+    console.log(this.password);
+    this.authService.login(this.username, this.password);
+  }
+
+  register() {
+    this.authService.register(this.username, this.password);
   }
 }

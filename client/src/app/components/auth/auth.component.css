@@ -38,3 +38,31 @@
   color: #fff;
   cursor: pointer;
 }
+
+input {
+  font-size: 24px;
+  padding: 10px;
+  border-radius: 38px;
+  user-select: none;
+}
+
+.blue {
+  background-color: var(--blue-button);
+}
+
+.green {
+  background-color: var(--green-button);
+}
+
+.blue:hover {
+  background-color: var(--blue-button-hover);
+}
+
+.green:hover {
+  background-color: var(--green-button-hover);
+}
+
+.container-input {
+  display: flex;
+  flex-direction: column;
+}

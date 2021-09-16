@@ -6,32 +6,34 @@ import { ClassService } from 'src/app/services/class.service';
 @Component({
   selector: 'app-project-tree',
   templateUrl: './project-tree.component.html',
-  styleUrls: ['./project-tree.component.css']
+  styleUrls: ['./project-tree.component.css'],
 })
 export class ProjectTreeComponent implements OnInit {
-
   classes: ClassItem[] = [];
   showAddClassComponent: boolean = false;
 
-  constructor(private classService: ClassService, private authService: AuthService) { }
+  constructor(
+    private classService: ClassService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.classService.getClasses((classes) => {
       this.classes = classes;
-    })
+    });
   }
 
   logoutGithub() {
-    this.authService.logoutGithub();
+    this.authService.logout();
   }
 
   getClasses() {
     this.classService.getClasses((classes) => {
       this.classes = classes;
-    })
+    });
   }
 
   removeClass(classItem: ClassItem) {
-    this.classes = this.classes.filter(c => c != classItem);
+    this.classes = this.classes.filter((c) => c != classItem);
   }
 }
