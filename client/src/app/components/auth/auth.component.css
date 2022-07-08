@@ -1,9 +1,21 @@
 .container {
+  display: flex;
+}
+
+.container-left {
+  margin-right: 20%;
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 20%;
   transform: translate(-50%, -50%);
-  z-index: 1;
+}
+
+.container-right {
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 65%;
+  transform: translate(-50%, -50%);
 }
 
 .header {
@@ -65,4 +77,8 @@ input {
 .container-input {
   display: flex;
   flex-direction: column;
+}
+
+.bold {
+  font-weight: bold;
 }

@@ -1,25 +1,49 @@
 <div class="container">
-  <div class="header selected">Authorization</div>
-  <div class="content">
-    <!-- <div class="button" (click)="loginWithGithub()">
-      Login with Github
+  <div class="container-left">
+    <div class="header selected">Authorization</div>
+    <div class="content">
+      <!-- <div class="button" (click)="loginWithGithub()">
+        Login with Github
+      </div>
+    -->
+      <div class="container-input">
+        <input
+          type="text"
+          placeholder="Username"
+          name="username"
+          [(ngModel)]="username"
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          name="password"
+          [(ngModel)]="password"
+        />
+      </div>
+      <div class="button blue" (click)="login()">Login</div>
+      <div class="button green" (click)="register()">Register</div>
     </div>
-  -->
-    <div class="container-input">
-      <input
-        type="text"
-        placeholder="Username"
-        name="username"
-        [(ngModel)]="username"
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        name="password"
-        [(ngModel)]="password"
-      />
-    </div>
-    <div class="button blue" (click)="login()">Login</div>
-    <div class="button green" (click)="register()">Register</div>
+  </div>
+  <div class="container-right">
+    <h1>What's New</h1>
+    <h2>9/15/2021</h2>
+    <h3>
+      Storn version 1.0 has been released!
+    </h3>
+    <p>
+      As well as plenty of bugs...   
+    </p>
+      <h3>Bugs fixed:</h3>
+      <ul id="bugsList">
+      </ul>
+      <h3>Features added:</h3>
+      <ul id="featuresList">
+      
+      </ul>
+      <h3>Upcoming features:</h3>
+      <ul id="upcomingFeaturesList">
+        <li><span class="bold">Submit ticket: </span>sumbit a request for new features, bug fixes, etc.</li>
+        <li><span class="bold">Change/forgot password: </span>way to change password if forgotten or otherwise</li>
+      </ul>
   </div>
 </div>
