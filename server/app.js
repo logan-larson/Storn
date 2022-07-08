@@ -30,7 +30,10 @@ app.use('/', sessionRouter);
 
 mongoose
 	.connect(
-		'mongodb+srv://admin:u9.yj8MFm6KpT8m@storn.9duq1.mongodb.net/Storn?retryWrites=true&w=majority',
+		//'mongodb+srv://admin:u9.yj8MFm6KpT8m@storn.9duq1.mongodb.net/?retryWrites=true&w=majority',
+		//'mongodb://admin:mongodb://admin:u9.yj8MFm6KpT8m@storn/?ssl=true&replicaSet=atlas-bc9bpj-shard-0&authSource=admin&retryWrites=true&w=majority@storn/?ssl=true&replicaSet=atlas-bc9bpj-shard-0&authSource=admin&retryWrites=true&w=majority',
+		'mongodb+srv://admin:u9.yj8MFm6KpT8m@storn.9duq1.mongodb.net/?retryWrites=true&w=majority',
+		//'mongodb://localhost:27017',
 		{
 			useNewUrlParser: true,
 			useUnifiedTopology: true,
